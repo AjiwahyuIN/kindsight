@@ -1,0 +1,171 @@
+.landing-story, .about-solutions-story, .solutions-testimonial-story { position: relative; isolation: isolate; }
+.solutions-testimonial-story { z-index: 2; }
+
+.about {
+  position: relative;
+  overflow: clip;
+  z-index: 1;
+  padding-block: var(--space-20);
+  border-radius: var(--radius-lg);
+  background: var(--color-background);
+
+  &__background {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    img { max-width: none; }
+  }
+
+  &__grid-horizontal {
+    position: absolute;
+    top: 348.57px;
+    left: calc(50% - 720px);
+    opacity: 0.6;
+  }
+
+  &__grid-vertical,
+  &__grid-cards {
+    position: absolute;
+    opacity: 0.6;
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+  }
+
+  &__grid-vertical {
+    top: 0;
+    left: calc(50% - 466.48px);
+    width: 934.477px;
+    height: 734.007px;
+  }
+
+  &__grid-cards {
+    top: 348.53px;
+    left: calc(50% - 487.16px);
+    width: 975.312px;
+    height: 272.725px;
+  }
+
+  &__fade {
+    position: absolute;
+    left: calc(50% - 720px);
+
+    &--top { top: 0; transform: scaleY(-1); }
+    &--bottom { bottom: 0; }
+  }
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-15);
+  }
+
+  &__header {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-5);
+    text-align: center;
+    font-weight: var(--font-weight-medium);
+  }
+
+  &__label {
+    display: flex;
+    box-sizing: content-box;
+    width: max-content;
+    height: 20px;
+    overflow: hidden;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 4px;
+
+    img { width: 20px; height: 20px; flex: none; }
+    span { flex: none; }
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    max-width: 732px;
+    font-size: var(--font-size-section);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-tight);
+    text-transform: capitalize;
+  }
+
+  &__title > span { display: inline-block; max-width: 100%; vertical-align: bottom; }
+
+  &__description {
+    max-width: 616px;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-md);
+    letter-spacing: 0.01em;
+    text-transform: capitalize;
+  }
+
+  &__label span { overflow: hidden; white-space: nowrap; }
+
+  &__statistics-stage {
+    position: relative;
+    width: min(100%, 54.5rem);
+  }
+
+  &__statistics-panel {
+    clip-path: inset(0px var(--about-panel-x, 0%) var(--about-panel-bottom, 0px) var(--about-panel-x, 0%) round var(--about-panel-radius, 12px));
+    position: absolute;
+    inset: var(--space-2);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__statistics {
+    position: relative;
+    --stat-card-value-size: clamp(2.25rem, 4.5vw, var(--font-size-stat));
+    display: grid;
+    width: min(100%, 54.5rem);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+    margin: 0;
+    padding: var(--space-2);
+    border-radius: var(--radius-lg);
+
+    .stat-card:nth-child(1) { --stat-card-label-width: 129px; }
+    .stat-card:nth-child(2) { --stat-card-label-width: 155px; }
+    .stat-card:nth-child(3) { --stat-card-label-width: 189px; }
+  }
+}
+
+@media (max-width: 63.999rem) {
+  .about__title { font-size: clamp(2rem, 5vw, var(--font-size-section)); }
+}
+
+@media (max-width: 47.999rem) {
+  .about {
+    padding-block: var(--space-12);
+
+    &__content { gap: var(--space-8); }
+    &__title { font-size: clamp(2rem, 7vw, 2.75rem); }
+    &__title-break { display: none; }
+    &__description { font-size: var(--font-size-base); }
+    &__statistics-stage { width: min(100%, 25rem); }
+    &__statistics {
+      --stat-card-value-size: 3rem;
+      --stat-card-gap: var(--space-6);
+      width: min(100%, 25rem);
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}

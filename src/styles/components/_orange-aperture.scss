@@ -1,0 +1,40 @@
+.has-landing-intro,
+.has-landing-intro body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+.has-landing-intro body {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+}
+
+.orange-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  overflow: clip;
+  pointer-events: none;
+  isolation: isolate;
+
+  &__veil { position: absolute; inset: 0; background: var(--color-white); pointer-events: auto; }
+  &__vector { position: absolute; inset: 0; width: 100%; height: 100%; }
+  &__skip {
+    position: absolute;
+    bottom: max(var(--space-6), env(safe-area-inset-bottom));
+    right: var(--container-gutter);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3);
+    border: 0;
+    border-radius: var(--radius-pill);
+    color: var(--color-text);
+    background: var(--color-surface);
+    font-size: var(--font-size-xs);
+    pointer-events: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orange-intro { display: none; }
+}

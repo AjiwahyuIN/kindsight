@@ -1,0 +1,2187 @@
+{
+  "navbar": {
+    "schema": {
+      "kind": "object",
+      "fields": {
+        "brandName": {
+          "kind": "text",
+          "label": "Brand Name",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "demoLabel": {
+          "kind": "text",
+          "label": "Demo Label",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "productBadge": {
+          "kind": "text",
+          "label": "Product Badge",
+          "max": 160,
+          "required": false,
+          "multiline": false,
+          "href": false
+        },
+        "labels": {
+          "kind": "object",
+          "fields": {
+            "serve": {
+              "kind": "text",
+              "label": "Serve",
+              "max": 160,
+              "required": true,
+              "multiline": false,
+              "href": false
+            },
+            "product": {
+              "kind": "text",
+              "label": "Product",
+              "max": 160,
+              "required": true,
+              "multiline": false,
+              "href": false
+            },
+            "company": {
+              "kind": "text",
+              "label": "Company",
+              "max": 160,
+              "required": true,
+              "multiline": false,
+              "href": false
+            },
+            "resources": {
+              "kind": "text",
+              "label": "Resources",
+              "max": 160,
+              "required": true,
+              "multiline": false,
+              "href": false
+            }
+          }
+        },
+        "groups": {
+          "kind": "object",
+          "fields": {
+            "serve": {
+              "kind": "array",
+              "label": "Serve",
+              "min": 1,
+              "max": 8,
+              "item": {
+                "kind": "object",
+                "fields": {
+                  "id": {
+                    "kind": "text",
+                    "label": "Stable ID",
+                    "max": 60,
+                    "required": true,
+                    "stableId": true
+                  },
+                  "label": {
+                    "kind": "text",
+                    "label": "Label",
+                    "max": 160,
+                    "required": true,
+                    "multiline": false,
+                    "href": false
+                  },
+                  "description": {
+                    "kind": "text",
+                    "label": "Description",
+                    "max": 2000,
+                    "required": true,
+                    "multiline": true,
+                    "href": false
+                  },
+                  "href": {
+                    "kind": "text",
+                    "label": "Href",
+                    "max": 500,
+                    "required": false,
+                    "multiline": false,
+                    "href": true
+                  }
+                }
+              },
+              "reorder": true
+            },
+            "product": {
+              "kind": "array",
+              "label": "Product",
+              "min": 1,
+              "max": 8,
+              "item": {
+                "kind": "object",
+                "fields": {
+                  "id": {
+                    "kind": "text",
+                    "label": "Stable ID",
+                    "max": 60,
+                    "required": true,
+                    "stableId": true
+                  },
+                  "label": {
+                    "kind": "text",
+                    "label": "Label",
+                    "max": 160,
+                    "required": true,
+                    "multiline": false,
+                    "href": false
+                  },
+                  "description": {
+                    "kind": "text",
+                    "label": "Description",
+                    "max": 2000,
+                    "required": true,
+                    "multiline": true,
+                    "href": false
+                  },
+                  "href": {
+                    "kind": "text",
+                    "label": "Href",
+                    "max": 500,
+                    "required": false,
+                    "multiline": false,
+                    "href": true
+                  }
+                }
+              },
+              "reorder": true
+            },
+            "resources": {
+              "kind": "array",
+              "label": "Resources",
+              "min": 1,
+              "max": 8,
+              "item": {
+                "kind": "object",
+                "fields": {
+                  "id": {
+                    "kind": "text",
+                    "label": "Stable ID",
+                    "max": 60,
+                    "required": true,
+                    "stableId": true
+                  },
+                  "label": {
+                    "kind": "text",
+                    "label": "Label",
+                    "max": 160,
+                    "required": true,
+                    "multiline": false,
+                    "href": false
+                  },
+                  "description": {
+                    "kind": "text",
+                    "label": "Description",
+                    "max": 2000,
+                    "required": true,
+                    "multiline": true,
+                    "href": false
+                  },
+                  "href": {
+                    "kind": "text",
+                    "label": "Href",
+                    "max": 500,
+                    "required": false,
+                    "multiline": false,
+                    "href": true
+                  }
+                }
+              },
+              "reorder": true
+            }
+          }
+        },
+        "company": {
+          "kind": "object",
+          "fields": {
+            "id": {
+              "kind": "text",
+              "label": "Stable ID",
+              "max": 60,
+              "required": true,
+              "stableId": true
+            },
+            "label": {
+              "kind": "text",
+              "label": "Label",
+              "max": 160,
+              "required": true,
+              "multiline": false,
+              "href": false
+            },
+            "description": {
+              "kind": "text",
+              "label": "Description",
+              "max": 2000,
+              "required": true,
+              "multiline": true,
+              "href": false
+            },
+            "href": {
+              "kind": "text",
+              "label": "Href",
+              "max": 500,
+              "required": false,
+              "multiline": false,
+              "href": true
+            }
+          }
+        }
+      }
+    },
+    "defaults": {
+      "brandName": "Kindsight",
+      "demoLabel": "Get a Demo",
+      "productBadge": "New",
+      "labels": {
+        "serve": "Who we Serve",
+        "product": "Product",
+        "company": "Company",
+        "resources": "Resources"
+      },
+      "groups": {
+        "serve": [
+          {
+            "id": "nonprofits",
+            "label": "Nonprofits",
+            "description": "Find the supporters who share your mission.",
+            "href": ""
+          },
+          {
+            "id": "healthcare",
+            "label": "Healthcare",
+            "description": "Build relationships that advance care.",
+            "href": ""
+          },
+          {
+            "id": "education",
+            "label": "Education",
+            "description": "Turn alumni connections into lifelong support.",
+            "href": ""
+          }
+        ],
+        "product": [
+          {
+            "id": "platform",
+            "label": "Fundraising Platform",
+            "description": "Fundraising powered by donor intelligence.",
+            "href": ""
+          },
+          {
+            "id": "ascend",
+            "label": "Ascend",
+            "description": "A fundraising CRM built on Salesforce.",
+            "href": ""
+          },
+          {
+            "id": "iwave",
+            "label": "iWave",
+            "description": "Donor research and real-time insights.",
+            "href": ""
+          }
+        ],
+        "resources": [
+          {
+            "id": "resource-hub",
+            "label": "Resource Hub",
+            "description": "Ideas and practical fundraising resources.",
+            "href": ""
+          },
+          {
+            "id": "blog",
+            "label": "Blog",
+            "description": "Perspectives from the fundraising community.",
+            "href": ""
+          },
+          {
+            "id": "events",
+            "label": "Events & Webinars",
+            "description": "Learn and connect with fellow practitioners.",
+            "href": ""
+          }
+        ]
+      },
+      "company": {
+        "id": "company",
+        "label": "About Kindsight",
+        "description": "Built on care, community, and commitment to your mission.",
+        "href": ""
+      }
+    }
+  },
+  "footer": {
+    "schema": {
+      "kind": "object",
+      "fields": {
+        "heading": {
+          "kind": "text",
+          "label": "Heading",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "description": {
+          "kind": "text",
+          "label": "Description",
+          "max": 2000,
+          "required": true,
+          "multiline": true,
+          "href": false
+        },
+        "copyright": {
+          "kind": "text",
+          "label": "Copyright",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "groups": {
+          "kind": "array",
+          "label": "Footer columns",
+          "min": 3,
+          "max": 3,
+          "item": {
+            "kind": "object",
+            "fields": {
+              "title": {
+                "kind": "text",
+                "label": "Title",
+                "max": 160,
+                "required": true,
+                "multiline": false,
+                "href": false
+              },
+              "links": {
+                "kind": "array",
+                "label": "Links",
+                "min": 1,
+                "max": 10,
+                "item": {
+                  "kind": "object",
+                  "fields": {
+                    "label": {
+                      "kind": "text",
+                      "label": "Label",
+                      "max": 160,
+                      "required": true,
+                      "multiline": false,
+                      "href": false
+                    },
+                    "href": {
+                      "kind": "text",
+                      "label": "Href",
+                      "max": 500,
+                      "required": false,
+                      "multiline": false,
+                      "href": true
+                    }
+                  }
+                },
+                "reorder": true
+              }
+            }
+          },
+          "reorder": true,
+          "indexed": [
+            {
+              "kind": "object",
+              "fields": {
+                "title": {
+                  "kind": "text",
+                  "label": "Title",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "links": {
+                  "kind": "array",
+                  "label": "Links",
+                  "min": 1,
+                  "max": 10,
+                  "item": {
+                    "kind": "object",
+                    "fields": {
+                      "label": {
+                        "kind": "text",
+                        "label": "Label",
+                        "max": 160,
+                        "required": true,
+                        "multiline": false,
+                        "href": false
+                      },
+                      "href": {
+                        "kind": "text",
+                        "label": "Href",
+                        "max": 500,
+                        "required": false,
+                        "multiline": false,
+                        "href": true
+                      }
+                    }
+                  },
+                  "reorder": true
+                }
+              }
+            },
+            {
+              "kind": "object",
+              "fields": {
+                "title": {
+                  "kind": "text",
+                  "label": "Title",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "links": {
+                  "kind": "array",
+                  "label": "Links",
+                  "min": 1,
+                  "max": 10,
+                  "item": {
+                    "kind": "object",
+                    "fields": {
+                      "label": {
+                        "kind": "text",
+                        "label": "Label",
+                        "max": 160,
+                        "required": true,
+                        "multiline": false,
+                        "href": false
+                      },
+                      "href": {
+                        "kind": "text",
+                        "label": "Href",
+                        "max": 500,
+                        "required": false,
+                        "multiline": false,
+                        "href": true
+                      }
+                    }
+                  },
+                  "reorder": true
+                }
+              }
+            },
+            {
+              "kind": "object",
+              "fields": {
+                "title": {
+                  "kind": "text",
+                  "label": "Title",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "links": {
+                  "kind": "array",
+                  "label": "Links",
+                  "min": 1,
+                  "max": 10,
+                  "item": {
+                    "kind": "object",
+                    "fields": {
+                      "label": {
+                        "kind": "text",
+                        "label": "Label",
+                        "max": 160,
+                        "required": true,
+                        "multiline": false,
+                        "href": false
+                      },
+                      "href": {
+                        "kind": "text",
+                        "label": "Href",
+                        "max": 500,
+                        "required": false,
+                        "multiline": false,
+                        "href": true
+                      }
+                    }
+                  },
+                  "reorder": true
+                }
+              }
+            }
+          ]
+        },
+        "legal": {
+          "kind": "array",
+          "label": "Legal",
+          "min": 1,
+          "max": 6,
+          "item": {
+            "kind": "object",
+            "fields": {
+              "label": {
+                "kind": "text",
+                "label": "Label",
+                "max": 160,
+                "required": true,
+                "multiline": false,
+                "href": false
+              },
+              "href": {
+                "kind": "text",
+                "label": "Href",
+                "max": 500,
+                "required": false,
+                "multiline": false,
+                "href": true
+              }
+            }
+          },
+          "reorder": true
+        }
+      }
+    },
+    "defaults": {
+      "heading": "Don’t miss what’s next",
+      "description": "By submitting your email, you’ll be the first to know about upcoming updates for Kindsight. You can unsubscribe at any time.",
+      "copyright": "Kindsight 2025©",
+      "groups": [
+        {
+          "title": "Products",
+          "links": [
+            {
+              "label": "iWave",
+              "href": "#solution-iwave-title"
+            },
+            {
+              "label": "Ascend",
+              "href": "#solution-ascend-title"
+            },
+            {
+              "label": "AdvancementRM",
+              "href": ""
+            },
+            {
+              "label": "Connect",
+              "href": ""
+            },
+            {
+              "label": "Collegiate Athletics Data",
+              "href": ""
+            },
+            {
+              "label": "Platform",
+              "href": "#solutions"
+            },
+            {
+              "label": "Integrations",
+              "href": ""
+            }
+          ]
+        },
+        {
+          "title": "Resources",
+          "links": [
+            {
+              "label": "Resource Hub",
+              "href": ""
+            },
+            {
+              "label": "Blog",
+              "href": ""
+            },
+            {
+              "label": "Events",
+              "href": ""
+            },
+            {
+              "label": "Cheat Sheets",
+              "href": ""
+            },
+            {
+              "label": "Case Sheets",
+              "href": ""
+            },
+            {
+              "label": "Webinar",
+              "href": ""
+            }
+          ]
+        },
+        {
+          "title": "Company",
+          "links": [
+            {
+              "label": "About",
+              "href": "#about"
+            },
+            {
+              "label": "Contact Us",
+              "href": ""
+            },
+            {
+              "label": "Support",
+              "href": ""
+            },
+            {
+              "label": "Press",
+              "href": ""
+            },
+            {
+              "label": "FAQs",
+              "href": ""
+            },
+            {
+              "label": "KindCon",
+              "href": ""
+            }
+          ]
+        }
+      ],
+      "legal": [
+        {
+          "label": "Permission & Terms",
+          "href": ""
+        },
+        {
+          "label": "Cookie policy",
+          "href": ""
+        },
+        {
+          "label": "Privacy Policy",
+          "href": ""
+        }
+      ]
+    }
+  },
+  "hero": {
+    "schema": {
+      "kind": "object",
+      "fields": {
+        "socialProof": {
+          "kind": "text",
+          "label": "Social Proof",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "heading": {
+          "kind": "text",
+          "label": "Heading",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "connector": {
+          "kind": "text",
+          "label": "Connector",
+          "max": 160,
+          "required": false,
+          "multiline": false,
+          "href": false
+        },
+        "highlight": {
+          "kind": "text",
+          "label": "Highlight",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "description": {
+          "kind": "text",
+          "label": "Description",
+          "max": 2000,
+          "required": true,
+          "multiline": true,
+          "href": false
+        },
+        "demoLabel": {
+          "kind": "text",
+          "label": "Demo Label",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "overviewLabel": {
+          "kind": "text",
+          "label": "Overview Label",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "overview": {
+          "kind": "array",
+          "label": "Overview slides",
+          "min": 1,
+          "max": 6,
+          "item": {
+            "kind": "object",
+            "fields": {
+              "title": {
+                "kind": "text",
+                "label": "Title",
+                "max": 160,
+                "required": true,
+                "multiline": false,
+                "href": false
+              },
+              "description": {
+                "kind": "text",
+                "label": "Description",
+                "max": 2000,
+                "required": true,
+                "multiline": true,
+                "href": false
+              }
+            }
+          },
+          "reorder": true
+        }
+      }
+    },
+    "defaults": {
+      "socialProof": "Loved by over 1 million Users",
+      "heading": "Fundraising intelligence",
+      "connector": "that",
+      "highlight": "unlocks opportunities",
+      "description": "Forget stale spreadsheets and ancient tools. With Kindsight, you get real-time insights that help you find major supporters.",
+      "demoLabel": "Request a Demo",
+      "overviewLabel": "Watch Overview",
+      "overview": [
+        {
+          "title": "Find your next major supporter.",
+          "description": "Explore donor intelligence to identify people who share your mission and have the capacity to give."
+        },
+        {
+          "title": "Build stronger relationships.",
+          "description": "Bring donor information and engagement together so your team can focus on meaningful connections."
+        },
+        {
+          "title": "Move your mission forward.",
+          "description": "See fundraising progress and promising opportunities together, then plan your team’s next steps."
+        }
+      ]
+    }
+  },
+  "partners": {
+    "schema": {
+      "kind": "object",
+      "fields": {
+        "items": {
+          "kind": "array",
+          "label": "Partner logos",
+          "min": 1,
+          "max": 20,
+          "item": {
+            "kind": "object",
+            "fields": {
+              "logo": {
+                "kind": "text",
+                "label": "Logo",
+                "max": 100,
+                "required": true,
+                "options": []
+              },
+              "name": {
+                "kind": "text",
+                "label": "Name",
+                "max": 160,
+                "required": true,
+                "multiline": false,
+                "href": false
+              }
+            }
+          },
+          "reorder": true
+        }
+      }
+    },
+    "defaults": {
+      "items": [
+        {
+          "logo": "nature-conservancy",
+          "name": "The Nature Conservancy"
+        },
+        {
+          "logo": "smithsonian-channel",
+          "name": "Smithsonian Channel"
+        },
+        {
+          "logo": "unicef",
+          "name": "UNICEF"
+        },
+        {
+          "logo": "hoag",
+          "name": "Hoag"
+        },
+        {
+          "logo": "feeding-america",
+          "name": "Feeding America"
+        }
+      ]
+    }
+  },
+  "difference": {
+    "schema": {
+      "kind": "object",
+      "fields": {
+        "label": {
+          "kind": "text",
+          "label": "Label",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "heading": {
+          "kind": "array",
+          "label": "Heading",
+          "min": 2,
+          "max": 2,
+          "item": {
+            "kind": "text",
+            "label": "*",
+            "max": 160,
+            "required": true,
+            "multiline": false,
+            "href": false
+          },
+          "reorder": true,
+          "indexed": [
+            {
+              "kind": "text",
+              "label": "*",
+              "max": 160,
+              "required": true,
+              "multiline": false,
+              "href": false
+            },
+            {
+              "kind": "text",
+              "label": "*",
+              "max": 160,
+              "required": true,
+              "multiline": false,
+              "href": false
+            }
+          ]
+        },
+        "items": {
+          "kind": "array",
+          "label": "Accordion panels",
+          "min": 3,
+          "max": 3,
+          "item": {
+            "kind": "object",
+            "fields": {
+              "id": {
+                "kind": "text",
+                "label": "Stable ID",
+                "max": 60,
+                "required": true,
+                "stableId": true
+              },
+              "title": {
+                "kind": "text",
+                "label": "Title",
+                "max": 160,
+                "required": true,
+                "multiline": false,
+                "href": false
+              },
+              "description": {
+                "kind": "text",
+                "label": "Description",
+                "max": 2000,
+                "required": true,
+                "multiline": true,
+                "href": false
+              }
+            }
+          },
+          "reorder": true,
+          "variants": {
+            "community": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "kind": "text",
+                  "label": "Stable ID",
+                  "max": 60,
+                  "required": true,
+                  "stableId": true
+                },
+                "title": {
+                  "kind": "text",
+                  "label": "Title",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "description": {
+                  "kind": "text",
+                  "label": "Description",
+                  "max": 2000,
+                  "required": true,
+                  "multiline": true,
+                  "href": false
+                }
+              }
+            },
+            "service": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "kind": "text",
+                  "label": "Stable ID",
+                  "max": 60,
+                  "required": true,
+                  "stableId": true
+                },
+                "title": {
+                  "kind": "text",
+                  "label": "Title",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "description": {
+                  "kind": "text",
+                  "label": "Description",
+                  "max": 2000,
+                  "required": true,
+                  "multiline": true,
+                  "href": false
+                }
+              }
+            },
+            "support": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "kind": "text",
+                  "label": "Stable ID",
+                  "max": 60,
+                  "required": true,
+                  "stableId": true
+                },
+                "title": {
+                  "kind": "text",
+                  "label": "Title",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "description": {
+                  "kind": "text",
+                  "label": "Description",
+                  "max": 2000,
+                  "required": true,
+                  "multiline": true,
+                  "href": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "defaults": {
+      "label": "The Kindsight difference",
+      "heading": [
+        "Built on care, community,",
+        "and commitment to your mission"
+      ],
+      "items": [
+        {
+          "id": "community",
+          "title": "A community built for practitioners",
+          "description": "With Kindsight, you’re never fundraising alone. When you join Kindsight, you join a thriving community of professionals who understand your challenges and share your mission."
+        },
+        {
+          "id": "service",
+          "title": "Exceptional service that puts you first",
+          "description": "Every mission is different. Find practical guidance for your team, with a focus on the fundraising work that matters to your organization."
+        },
+        {
+          "id": "support",
+          "title": "Support that evolves with you",
+          "description": "As your priorities change, keep learning and exploring new ways to support your mission. Bring your team together around the next step."
+        }
+      ]
+    }
+  },
+  "about": {
+    "schema": {
+      "kind": "object",
+      "fields": {
+        "label": {
+          "kind": "text",
+          "label": "Label",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "heading": {
+          "kind": "array",
+          "label": "Heading",
+          "min": 2,
+          "max": 2,
+          "item": {
+            "kind": "text",
+            "label": "*",
+            "max": 160,
+            "required": true,
+            "multiline": false,
+            "href": false
+          },
+          "reorder": true,
+          "indexed": [
+            {
+              "kind": "text",
+              "label": "*",
+              "max": 160,
+              "required": true,
+              "multiline": false,
+              "href": false
+            },
+            {
+              "kind": "text",
+              "label": "*",
+              "max": 160,
+              "required": true,
+              "multiline": false,
+              "href": false
+            }
+          ]
+        },
+        "description": {
+          "kind": "text",
+          "label": "Description",
+          "max": 2000,
+          "required": true,
+          "multiline": true,
+          "href": false
+        },
+        "statistics": {
+          "kind": "array",
+          "label": "Statistics",
+          "min": 3,
+          "max": 3,
+          "item": {
+            "kind": "object",
+            "fields": {
+              "id": {
+                "kind": "text",
+                "label": "Stable ID",
+                "max": 60,
+                "required": true,
+                "stableId": true
+              },
+              "value": {
+                "kind": "text",
+                "label": "Value",
+                "max": 160,
+                "required": true,
+                "multiline": false,
+                "href": false
+              },
+              "suffix": {
+                "kind": "text",
+                "label": "Suffix",
+                "max": 160,
+                "required": false,
+                "multiline": false,
+                "href": false
+              },
+              "label": {
+                "kind": "text",
+                "label": "Label",
+                "max": 160,
+                "required": true,
+                "multiline": false,
+                "href": false
+              }
+            }
+          },
+          "reorder": false,
+          "variants": {
+            "organizations": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "kind": "text",
+                  "label": "Stable ID",
+                  "max": 60,
+                  "required": true,
+                  "stableId": true
+                },
+                "value": {
+                  "kind": "text",
+                  "label": "Value",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "suffix": {
+                  "kind": "text",
+                  "label": "Suffix",
+                  "max": 160,
+                  "required": false,
+                  "multiline": false,
+                  "href": false
+                },
+                "label": {
+                  "kind": "text",
+                  "label": "Label",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                }
+              }
+            },
+            "funds": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "kind": "text",
+                  "label": "Stable ID",
+                  "max": 60,
+                  "required": true,
+                  "stableId": true
+                },
+                "value": {
+                  "kind": "text",
+                  "label": "Value",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "suffix": {
+                  "kind": "text",
+                  "label": "Suffix",
+                  "max": 160,
+                  "required": false,
+                  "multiline": false,
+                  "href": false
+                },
+                "label": {
+                  "kind": "text",
+                  "label": "Label",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                }
+              }
+            },
+            "experience": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "kind": "text",
+                  "label": "Stable ID",
+                  "max": 60,
+                  "required": true,
+                  "stableId": true
+                },
+                "value": {
+                  "kind": "text",
+                  "label": "Value",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "suffix": {
+                  "kind": "text",
+                  "label": "Suffix",
+                  "max": 160,
+                  "required": false,
+                  "multiline": false,
+                  "href": false
+                },
+                "label": {
+                  "kind": "text",
+                  "label": "Label",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "defaults": {
+      "label": "About Kindsight",
+      "heading": [
+        "Kindsight is a fundraising",
+        "intelligence platform."
+      ],
+      "description": "fundraising teams can move with confidence—spending less time on guesswork and more time advancing their mission.",
+      "statistics": [
+        {
+          "id": "organizations",
+          "value": "3,000",
+          "suffix": "+",
+          "label": "organizations supported"
+        },
+        {
+          "id": "funds",
+          "value": "$8B",
+          "suffix": "+",
+          "label": "funds raised using Kindsight"
+        },
+        {
+          "id": "experience",
+          "value": "20",
+          "suffix": "+",
+          "label": "years of fundraising intelligence"
+        }
+      ]
+    }
+  },
+  "solutions": {
+    "schema": {
+      "kind": "object",
+      "fields": {
+        "label": {
+          "kind": "text",
+          "label": "Label",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "heading": {
+          "kind": "array",
+          "label": "Heading",
+          "min": 2,
+          "max": 2,
+          "item": {
+            "kind": "text",
+            "label": "*",
+            "max": 160,
+            "required": true,
+            "multiline": false,
+            "href": false
+          },
+          "reorder": true,
+          "indexed": [
+            {
+              "kind": "text",
+              "label": "*",
+              "max": 160,
+              "required": true,
+              "multiline": false,
+              "href": false
+            },
+            {
+              "kind": "text",
+              "label": "*",
+              "max": 160,
+              "required": true,
+              "multiline": false,
+              "href": false
+            }
+          ]
+        },
+        "description": {
+          "kind": "text",
+          "label": "Description",
+          "max": 2000,
+          "required": true,
+          "multiline": true,
+          "href": false
+        },
+        "products": {
+          "kind": "array",
+          "label": "Products",
+          "min": 3,
+          "max": 3,
+          "item": {
+            "kind": "object",
+            "fields": {
+              "id": {
+                "kind": "text",
+                "label": "Stable ID",
+                "max": 60,
+                "required": true,
+                "stableId": true
+              },
+              "title": {
+                "kind": "text",
+                "label": "Title",
+                "max": 160,
+                "required": true,
+                "multiline": false,
+                "href": false
+              },
+              "description": {
+                "kind": "text",
+                "label": "Description",
+                "max": 2000,
+                "required": true,
+                "multiline": true,
+                "href": false
+              },
+              "cta": {
+                "kind": "text",
+                "label": "Cta",
+                "max": 160,
+                "required": true,
+                "multiline": false,
+                "href": false
+              },
+              "image": {
+                "kind": "object",
+                "fields": {
+                  "alt": {
+                    "kind": "text",
+                    "label": "Alt",
+                    "max": 160,
+                    "required": true,
+                    "multiline": false,
+                    "href": false
+                  },
+                  "badge": {
+                    "kind": "object",
+                    "fields": {
+                      "value": {
+                        "kind": "text",
+                        "label": "Value",
+                        "max": 160,
+                        "required": true,
+                        "multiline": false,
+                        "href": false
+                      },
+                      "label": {
+                        "kind": "text",
+                        "label": "Label",
+                        "max": 160,
+                        "required": true,
+                        "multiline": false,
+                        "href": false
+                      },
+                      "detail": {
+                        "kind": "text",
+                        "label": "Detail",
+                        "max": 160,
+                        "required": true,
+                        "multiline": false,
+                        "href": false
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "reorder": false,
+          "variants": {
+            "platform": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "kind": "text",
+                  "label": "Stable ID",
+                  "max": 60,
+                  "required": true,
+                  "stableId": true
+                },
+                "title": {
+                  "kind": "text",
+                  "label": "Title",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "description": {
+                  "kind": "text",
+                  "label": "Description",
+                  "max": 2000,
+                  "required": true,
+                  "multiline": true,
+                  "href": false
+                },
+                "cta": {
+                  "kind": "text",
+                  "label": "Cta",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "image": {
+                  "kind": "object",
+                  "fields": {
+                    "alt": {
+                      "kind": "text",
+                      "label": "Alt",
+                      "max": 160,
+                      "required": true,
+                      "multiline": false,
+                      "href": false
+                    },
+                    "badge": {
+                      "kind": "object",
+                      "fields": {
+                        "value": {
+                          "kind": "text",
+                          "label": "Value",
+                          "max": 160,
+                          "required": true,
+                          "multiline": false,
+                          "href": false
+                        },
+                        "label": {
+                          "kind": "text",
+                          "label": "Label",
+                          "max": 160,
+                          "required": true,
+                          "multiline": false,
+                          "href": false
+                        },
+                        "detail": {
+                          "kind": "text",
+                          "label": "Detail",
+                          "max": 160,
+                          "required": true,
+                          "multiline": false,
+                          "href": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "ascend": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "kind": "text",
+                  "label": "Stable ID",
+                  "max": 60,
+                  "required": true,
+                  "stableId": true
+                },
+                "title": {
+                  "kind": "text",
+                  "label": "Title",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "description": {
+                  "kind": "text",
+                  "label": "Description",
+                  "max": 2000,
+                  "required": true,
+                  "multiline": true,
+                  "href": false
+                }
+              }
+            },
+            "iwave": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "kind": "text",
+                  "label": "Stable ID",
+                  "max": 60,
+                  "required": true,
+                  "stableId": true
+                },
+                "title": {
+                  "kind": "text",
+                  "label": "Title",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "description": {
+                  "kind": "text",
+                  "label": "Description",
+                  "max": 2000,
+                  "required": true,
+                  "multiline": true,
+                  "href": false
+                }
+              }
+            }
+          }
+        },
+        "overview": {
+          "kind": "object",
+          "fields": {
+            "title": {
+              "kind": "text",
+              "label": "Title",
+              "max": 160,
+              "required": true,
+              "multiline": false,
+              "href": false
+            },
+            "description": {
+              "kind": "text",
+              "label": "Description",
+              "max": 2000,
+              "required": true,
+              "multiline": true,
+              "href": false
+            },
+            "note": {
+              "kind": "text",
+              "label": "Note",
+              "max": 2000,
+              "required": true,
+              "multiline": true,
+              "href": false
+            },
+            "topics": {
+              "kind": "array",
+              "label": "Topics",
+              "min": 3,
+              "max": 3,
+              "item": {
+                "kind": "object",
+                "fields": {
+                  "title": {
+                    "kind": "text",
+                    "label": "Title",
+                    "max": 160,
+                    "required": true,
+                    "multiline": false,
+                    "href": false
+                  },
+                  "description": {
+                    "kind": "text",
+                    "label": "Description",
+                    "max": 2000,
+                    "required": true,
+                    "multiline": true,
+                    "href": false
+                  }
+                }
+              },
+              "reorder": true,
+              "indexed": [
+                {
+                  "kind": "object",
+                  "fields": {
+                    "title": {
+                      "kind": "text",
+                      "label": "Title",
+                      "max": 160,
+                      "required": true,
+                      "multiline": false,
+                      "href": false
+                    },
+                    "description": {
+                      "kind": "text",
+                      "label": "Description",
+                      "max": 2000,
+                      "required": true,
+                      "multiline": true,
+                      "href": false
+                    }
+                  }
+                },
+                {
+                  "kind": "object",
+                  "fields": {
+                    "title": {
+                      "kind": "text",
+                      "label": "Title",
+                      "max": 160,
+                      "required": true,
+                      "multiline": false,
+                      "href": false
+                    },
+                    "description": {
+                      "kind": "text",
+                      "label": "Description",
+                      "max": 2000,
+                      "required": true,
+                      "multiline": true,
+                      "href": false
+                    }
+                  }
+                },
+                {
+                  "kind": "object",
+                  "fields": {
+                    "title": {
+                      "kind": "text",
+                      "label": "Title",
+                      "max": 160,
+                      "required": true,
+                      "multiline": false,
+                      "href": false
+                    },
+                    "description": {
+                      "kind": "text",
+                      "label": "Description",
+                      "max": 2000,
+                      "required": true,
+                      "multiline": true,
+                      "href": false
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "defaults": {
+      "label": "Solutions",
+      "heading": [
+        "Our incredible",
+        "solutions"
+      ],
+      "description": "Our platform adapts to the unique goals, challenges, and donor ecosystems of each sector.",
+      "products": [
+        {
+          "id": "platform",
+          "title": "Fundraising Platform",
+          "description": "The only fundraising CRM powered by real-time donor intelligence.",
+          "cta": "Learn More",
+          "image": {
+            "alt": "Two people laughing together.",
+            "badge": {
+              "value": "12",
+              "label": "Hidden Gems",
+              "detail": "prospect"
+            }
+          }
+        },
+        {
+          "id": "ascend",
+          "title": "Ascend",
+          "description": "The award-winning CRM built on Salesforce, built for fundraising teams."
+        },
+        {
+          "id": "iwave",
+          "title": "iWave",
+          "description": "Comprehensive donor data and real-time live profiles."
+        }
+      ],
+      "overview": {
+        "title": "Fundraising Platform",
+        "description": "Explore fundraising powered by donor intelligence.",
+        "note": "This is a sample overview. Full product details will be added later.",
+        "topics": [
+          {
+            "title": "Fundraising CRM",
+            "description": "Bring fundraising work and supporter information into one view."
+          },
+          {
+            "title": "Donor intelligence",
+            "description": "Explore information that can help your team identify potential supporters."
+          },
+          {
+            "title": "Real-time insights",
+            "description": "Use current donor information to inform the next step in your fundraising work."
+          }
+        ]
+      }
+    }
+  },
+  "testimonials": {
+    "schema": {
+      "kind": "object",
+      "fields": {
+        "heading": {
+          "kind": "text",
+          "label": "Heading",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "introduction": {
+          "kind": "text",
+          "label": "Introduction",
+          "max": 2000,
+          "required": true,
+          "multiline": true,
+          "href": false
+        },
+        "stories": {
+          "kind": "array",
+          "label": "Stories",
+          "min": 1,
+          "max": 6,
+          "item": {
+            "kind": "object",
+            "fields": {
+              "id": {
+                "kind": "text",
+                "label": "Stable ID",
+                "max": 60,
+                "required": true,
+                "stableId": true
+              },
+              "name": {
+                "kind": "text",
+                "label": "Name",
+                "max": 160,
+                "required": true,
+                "multiline": false,
+                "href": false
+              },
+              "rating": {
+                "kind": "text",
+                "label": "Rating",
+                "max": 160,
+                "required": true,
+                "multiline": false,
+                "href": false
+              },
+              "period": {
+                "kind": "text",
+                "label": "Period",
+                "max": 160,
+                "required": true,
+                "multiline": false,
+                "href": false
+              },
+              "quote": {
+                "kind": "text",
+                "label": "Quote",
+                "max": 2000,
+                "required": true,
+                "multiline": true,
+                "href": false
+              },
+              "tagline": {
+                "kind": "text",
+                "label": "Tagline",
+                "max": 2000,
+                "required": true,
+                "multiline": true,
+                "href": false
+              },
+              "imageAlt": {
+                "kind": "text",
+                "label": "Image Alt",
+                "max": 160,
+                "required": true,
+                "multiline": false,
+                "href": false
+              }
+            }
+          },
+          "reorder": true
+        }
+      }
+    },
+    "defaults": {
+      "heading": "Our donors stories",
+      "introduction": "Hear what people have to say about working together. Real moments, real experience, real feedback.",
+      "stories": [
+        {
+          "id": "design-story",
+          "name": "Rafatar Norman",
+          "rating": "4.9/5",
+          "period": "2023-present",
+          "quote": "“Kindsight transformed how we identify and engage donors. Our fundraising strategy is now data-driven and far more effective.”",
+          "tagline": "Really love this platform. Good job, guys!",
+          "imageAlt": "Portrait used in the Kindsight testimonial design."
+        },
+        {
+          "id": "sample-nonprofit",
+          "name": "Example nonprofit team",
+          "rating": "4.9/5",
+          "period": "Sample story",
+          "quote": "“A clearer view of our supporters helps our team plan conversations and focus on the relationships that matter to our mission.”",
+          "tagline": "Illustrative feedback for this frontend preview.",
+          "imageAlt": "Illustrative portrait reused for a sample story."
+        },
+        {
+          "id": "sample-education",
+          "name": "Example education team",
+          "rating": "4.9/5",
+          "period": "Sample story",
+          "quote": "“Bringing our information together gives everyone a shared starting point for building thoughtful, lasting connections with supporters.”",
+          "tagline": "Illustrative feedback for this frontend preview.",
+          "imageAlt": "Illustrative portrait reused for a sample story."
+        }
+      ]
+    }
+  },
+  "missions": {
+    "schema": {
+      "kind": "object",
+      "fields": {
+        "label": {
+          "kind": "text",
+          "label": "Label",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "heading": {
+          "kind": "text",
+          "label": "Heading",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "introduction": {
+          "kind": "text",
+          "label": "Introduction",
+          "max": 2000,
+          "required": true,
+          "multiline": true,
+          "href": false
+        },
+        "emphasis": {
+          "kind": "text",
+          "label": "Emphasis",
+          "max": 2000,
+          "required": true,
+          "multiline": true,
+          "href": false
+        },
+        "benefits": {
+          "kind": "array",
+          "label": "Benefits",
+          "min": 2,
+          "max": 2,
+          "item": {
+            "kind": "object",
+            "fields": {
+              "description": {
+                "kind": "text",
+                "label": "Description",
+                "max": 2000,
+                "required": true,
+                "multiline": true,
+                "href": false
+              }
+            }
+          },
+          "reorder": false,
+          "indexed": [
+            {
+              "kind": "object",
+              "fields": {
+                "description": {
+                  "kind": "text",
+                  "label": "Description",
+                  "max": 2000,
+                  "required": true,
+                  "multiline": true,
+                  "href": false
+                }
+              }
+            },
+            {
+              "kind": "object",
+              "fields": {
+                "description": {
+                  "kind": "text",
+                  "label": "Description",
+                  "max": 2000,
+                  "required": true,
+                  "multiline": true,
+                  "href": false
+                }
+              }
+            }
+          ]
+        },
+        "donors": {
+          "kind": "text",
+          "label": "Donors",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "donorLabel": {
+          "kind": "text",
+          "label": "Donor Label",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "growth": {
+          "kind": "text",
+          "label": "Growth",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "growthLabel": {
+          "kind": "text",
+          "label": "Growth Label",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        }
+      }
+    },
+    "defaults": {
+      "label": "Missions",
+      "heading": "Driving these missions forward (and thousands more!)",
+      "introduction": "And thousands more across education, healthcare, and nonprofit sectors. ",
+      "emphasis": "Trusted by organizations committed to funding what matters most.",
+      "benefits": [
+        {
+          "description": "Unite the team with insights from donors and ensure everyone stays coordinated."
+        },
+        {
+          "description": "Every donor deserves to feel truly valued. With AI-driven tools that draft heartfelt messages."
+        }
+      ],
+      "donors": "97",
+      "donorLabel": "Donors Grow Together",
+      "growth": "54%",
+      "growthLabel": "New Giving Velocity"
+    }
+  },
+  "sectors": {
+    "schema": {
+      "kind": "object",
+      "fields": {
+        "label": {
+          "kind": "text",
+          "label": "Label",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "heading": {
+          "kind": "text",
+          "label": "Heading",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "emphasis": {
+          "kind": "text",
+          "label": "Emphasis",
+          "max": 2000,
+          "required": true,
+          "multiline": true,
+          "href": false
+        },
+        "description": {
+          "kind": "text",
+          "label": "Description",
+          "max": 2000,
+          "required": true,
+          "multiline": true,
+          "href": false
+        },
+        "donation": {
+          "kind": "text",
+          "label": "Donation",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "volunteers": {
+          "kind": "text",
+          "label": "Volunteers",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "percentage": {
+          "kind": "text",
+          "label": "Percentage",
+          "max": 160,
+          "required": true,
+          "multiline": false,
+          "href": false
+        },
+        "cards": {
+          "kind": "array",
+          "label": "Cards",
+          "min": 3,
+          "max": 3,
+          "item": {
+            "kind": "object",
+            "fields": {
+              "id": {
+                "kind": "text",
+                "label": "Stable ID",
+                "max": 60,
+                "required": true,
+                "stableId": true
+              },
+              "title": {
+                "kind": "text",
+                "label": "Title",
+                "max": 160,
+                "required": true,
+                "multiline": false,
+                "href": false
+              },
+              "description": {
+                "kind": "text",
+                "label": "Description",
+                "max": 2000,
+                "required": true,
+                "multiline": true,
+                "href": false
+              }
+            }
+          },
+          "reorder": false,
+          "variants": {
+            "nonprofits": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "kind": "text",
+                  "label": "Stable ID",
+                  "max": 60,
+                  "required": true,
+                  "stableId": true
+                },
+                "title": {
+                  "kind": "text",
+                  "label": "Title",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "description": {
+                  "kind": "text",
+                  "label": "Description",
+                  "max": 2000,
+                  "required": true,
+                  "multiline": true,
+                  "href": false
+                }
+              }
+            },
+            "healthcare": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "kind": "text",
+                  "label": "Stable ID",
+                  "max": 60,
+                  "required": true,
+                  "stableId": true
+                },
+                "title": {
+                  "kind": "text",
+                  "label": "Title",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "description": {
+                  "kind": "text",
+                  "label": "Description",
+                  "max": 2000,
+                  "required": true,
+                  "multiline": true,
+                  "href": false
+                }
+              }
+            },
+            "education": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "kind": "text",
+                  "label": "Stable ID",
+                  "max": 60,
+                  "required": true,
+                  "stableId": true
+                },
+                "title": {
+                  "kind": "text",
+                  "label": "Title",
+                  "max": 160,
+                  "required": true,
+                  "multiline": false,
+                  "href": false
+                },
+                "description": {
+                  "kind": "text",
+                  "label": "Description",
+                  "max": 2000,
+                  "required": true,
+                  "multiline": true,
+                  "href": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "defaults": {
+      "label": "Sector",
+      "heading": "Each sector we serve",
+      "emphasis": "Every organization is different.",
+      "description": " Our platform adapts to the unique goals, challenges, and donor ecosystems of each sector.",
+      "donation": "$11,400.97",
+      "volunteers": "198 Volunteer",
+      "percentage": "52%",
+      "cards": [
+        {
+          "id": "nonprofits",
+          "title": "Nonprofits",
+          "description": "Explore how Kindsight helps nonprofit teams fund what matters most."
+        },
+        {
+          "id": "healthcare",
+          "title": "Healthcare",
+          "description": "Identify high-capacity donors and increase funding outcomes."
+        },
+        {
+          "id": "education",
+          "title": "Education",
+          "description": "Turn alumni data into lifelong support & strengthen alumni relationships and major gifts."
+        }
+      ]
+    }
+  }
+}

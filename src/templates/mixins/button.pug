@@ -1,0 +1,15 @@
+//- Link: pass href; action: native button. Extra HTML attributes use &attributes.
+//- Variants: primary, dark, light, outline. Sizes: sm, md.
+mixin button(label, options = {})
+  - const { href, variant = 'primary', size = 'md', type = 'button' } = options
+  - const classes = ['button', `button--${variant}`, `button--${size}`]
+  if href
+    a(class=classes href=href)&attributes(attributes)
+      span.button__label= label
+      if block
+        block
+  else
+    button(class=classes type=type)&attributes(attributes)
+      span.button__label= label
+      if block
+        block

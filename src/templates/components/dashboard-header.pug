@@ -1,0 +1,34 @@
+include ../mixins/dashboard-icon.pug
+
+header.dashboard-shell__topbar
+  .dashboard-shell__brand-column
+    a.dashboard-shell__brand(href='/' aria-label='Kindsight home')
+      +dashboardIcon('/src/assets/dashboard/brand.svg', 'brand')
+      span Kindsight
+  .dashboard-shell__nav-scroller
+    nav.dashboard-shell__navigation(aria-label='Dashboard navigation')
+      a.dashboard-shell__nav-current(href='/dashboard.html' aria-current='page')
+        +dashboardIcon('/src/assets/icons/hero/home.svg')
+        span Dashboard
+      each item in dashboardShell.navigation
+        button.dashboard-shell__nav-item(type='button' aria-label=item.label + ' (preview)' title=item.label + ' (preview)' aria-haspopup='dialog' data-shell-preview=item.id)
+          +dashboardIcon(item.icon)
+  .dashboard-shell__utilities
+    button.dashboard-shell__round(type='button' aria-label='Settings (preview)' title='Settings (preview)' aria-haspopup='dialog' data-shell-preview='settings')
+      +dashboardIcon('/src/assets/dashboard/settings.svg')
+    button.dashboard-shell__notification(type='button' aria-label='Notifications (preview)' title='Notifications (preview)' aria-haspopup='dialog' data-shell-preview='notifications')
+      +dashboardIcon('/src/assets/dashboard/notifications.svg', 'notification')
+    .dashboard-shell__account-area
+      button.dashboard-shell__profile(type='button' aria-label='Open account menu' aria-expanded='false' aria-controls='dashboard-account' data-shell-account-toggle)
+        span.dashboard-shell__portrait
+          img(src='/src/assets/images/hero/profile.png' alt='')
+        span.dashboard-shell__profile-copy
+          strong(data-shell-name) Admin
+          span(data-shell-email)
+      section#dashboard-account.dashboard-shell__account(aria-label='Account menu' hidden data-shell-account)
+        p.dashboard-shell__account-label Signed in as
+        strong(data-shell-account-name)
+        p.dashboard-shell__account-email(data-shell-account-email)
+        a(href='/admin.html') Manage fundraising
+        a(href='/content.html') Edit landing content
+        button(type='button' data-shell-logout) Sign out

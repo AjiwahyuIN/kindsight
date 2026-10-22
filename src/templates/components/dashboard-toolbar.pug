@@ -1,0 +1,26 @@
+.dashboard-shell__toolbar
+  .dashboard-shell__heading
+    h1.dashboard-shell__title(data-shell-title)= dashboardShell.title
+    button.dashboard-shell__edit(type='button' aria-label='Edit dashboard title for this view' title='Edit dashboard title' aria-haspopup='dialog' data-shell-edit)
+      +dashboardIcon('/src/assets/dashboard/edit.svg', 'edit')
+  .dashboard-shell__toolbar-actions
+    button.dashboard-shell__period(type='button' aria-label='Select reporting period' aria-haspopup='dialog' data-shell-period)
+      span.dashboard-shell__calendar
+        +dashboardIcon('/src/assets/dashboard/calendar.svg', 'calendar')
+      span.dashboard-shell__period-copy
+        span(data-shell-period-label) Select period
+        strong(data-shell-period-year) UTC
+    .dashboard-shell__tools
+      button.dashboard-shell__tool(type='button' aria-label='Print dashboard' title='Print dashboard' data-shell-print)
+        +dashboardIcon('/src/assets/dashboard/print.svg')
+      button.dashboard-shell__tool(type='button' aria-label='Download summary as JSON' title='Download summary as JSON' disabled data-shell-export)
+        +dashboardIcon('/src/assets/dashboard/export.svg')
+      button.dashboard-shell__tool.dashboard-shell__favorite(type='button' aria-label='Favorite dashboard for this visit' title='Favorite dashboard for this visit' aria-pressed='true' data-shell-favorite)
+        +dashboardIcon('/src/assets/dashboard/favorite.svg')
+    button.dashboard-shell__share(type='button' aria-label='Copy dashboard link' title='Copy dashboard link' data-shell-share)
+      span.dashboard-shell__avatars(aria-hidden='true')
+        each src, index in dashboardShell.avatars
+          span.dashboard-shell__avatar(class=index === 1 ? 'dashboard-shell__avatar--second' : '')
+            img(src=src alt='')
+      +dashboardIcon('/src/assets/dashboard/share.svg')
+      span Share

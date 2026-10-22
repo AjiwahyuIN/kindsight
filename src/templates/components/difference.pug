@@ -1,0 +1,36 @@
+include ../mixins/accordion.pug
+
+section#difference.difference(aria-labelledby='difference-title' data-difference lang='en')
+  .difference__background(aria-hidden='true')
+    .difference__grid-horizontal
+      img(src='/src/assets/difference/grid-horizontal.svg' alt='')
+    .difference__grid-vertical
+      img(src='/src/assets/difference/grid-vertical.svg' alt='')
+    .difference__fade.difference__fade--top
+      img(src='/src/assets/difference/edge-fade.svg' alt='')
+    .difference__fade.difference__fade--bottom
+      img(src='/src/assets/difference/edge-fade.svg' alt='')
+  .difference__content.container
+    .difference__header
+      h2#difference-title.difference__title
+        each line, index in difference.heading
+          if index > 0
+            br.difference__title-break
+            = ' '
+          span(data-difference-heading=index)= line
+      p.difference__label(data-difference-label)= difference.label
+    .difference__body
+      +accordion(difference.items, { id: 'difference', label: 'The Kindsight difference' })
+      figure.difference__illustration(role='img' aria-label='Illustrative Insight: Hidden Gems 12, Distinguished 19, New Prospect 17, Your champion 23. Example counts, not live data.' data-difference-illustration)
+        .difference__insight(aria-hidden='true')
+          p.difference__insight-title
+            img(src='/src/assets/difference/insight-dot.svg' alt='')
+            span(data-difference-insight-title)= difference.insight.title
+          .difference__metrics
+            each metric in difference.insight.metrics
+              .difference__metric(data-difference-metric=metric.id)
+                img(src=metric.icon alt='')
+                span.difference__metric-label(data-difference-metric-label)= metric.label
+                span.difference__metric-value(data-difference-metric-value)= metric.value
+
+    p.difference__notice(data-difference-notice role='status' hidden)

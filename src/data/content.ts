@@ -1,0 +1,12 @@
+import { navigationContent } from './navigation';
+import { footerContent } from './footer';
+import { heroContent } from './hero';
+import { partnerLogos } from './partners';
+import { differenceContent } from './difference';
+import { aboutContent } from './about';
+import { solutionsContent } from './solutions';
+import { testimonialsContent } from './testimonials';
+import { missionsContent } from './missions';
+import { sectorsContent } from './sectors';
+import type { ContentMap } from '../services/content-types';
+export const contentDefaults: ContentMap = { navbar: navigationContent, footer: footerContent, hero: heroContent, partners: { items: partnerLogos.map(logo => ({ logo: logo.id, name: logo.name })) }, difference: differenceContent, about: aboutContent, solutions: solutionsContent, testimonials: testimonialsContent, missions: missionsContent, sectors: sectorsContent };

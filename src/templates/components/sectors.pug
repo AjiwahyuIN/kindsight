@@ -1,0 +1,41 @@
+section#sectors.sectors(aria-labelledby='sectors-title' lang='en')
+  +endBackground('sectors', 'd4a90.svg', 'da6cb.svg')
+  .container.sectors__content
+    .sectors__header
+      +sectionLabel(ending.sectors.label)
+      h2#sectors-title.sectors__title(data-end-text='sectors.heading')= ending.sectors.heading
+      p.sectors__description
+        strong(data-end-text='sectors.emphasis')= ending.sectors.emphasis
+        span(data-end-text='sectors.description')= ending.sectors.description
+    .sectors__cards
+      each card, index in ending.sectors.cards
+        if index === 0
+          article.sector-feature
+            .sector-feature__inner
+              img.sector-feature__photo(src='/src/assets/sectors/' + card.image alt='Volunteers supporting a nonprofit mission' loading='lazy')
+              .sector-feature__header
+                h3(data-end-text='sectors.cards.' + index + '.title')= card.title
+                button.sector-feature__open(type='button' data-sector-open=card.id aria-label='Explore ' + card.title aria-haspopup='dialog')
+                  img(src='/src/assets/sectors/f9b89.svg' alt='')
+              .sector-feature__metrics
+                p.sector-feature__label Total Donation
+                p.sector-feature__amount(data-end-text='sectors.donation')= ending.sectors.donation
+                .sector-feature__bar(aria-hidden='true')
+                  span
+                .sector-feature__caption
+                  span(data-end-text='sectors.volunteers')= ending.sectors.volunteers
+                  span(data-end-text='sectors.percentage')= ending.sectors.percentage
+                button.sector-feature__learn(type='button' data-sector-open=card.id aria-haspopup='dialog')
+                  | Learn More
+                  img(src='/src/assets/sectors/5f810.svg' alt='')
+        else
+          .sector-card-column(class=index === 2 ? 'sector-card-column--reverse' : '')
+            article.sector-card
+              h3.sector-card__title(data-end-text='sectors.cards.' + index + '.title')= card.title
+              .sector-card__body
+                .sector-card__top
+                  img.sector-card__thumbnail(src='/src/assets/sectors/' + card.image alt='' loading='lazy')
+                  button.sector-card__open(type='button' data-sector-open=card.id aria-label='Explore ' + card.title aria-haspopup='dialog')
+                    img(src='/src/assets/sectors/' + card.icon alt='')
+                p(data-end-text='sectors.cards.' + index + '.description')= card.description
+            span.sector-card-column__number(aria-hidden='true')= '0' + (index + 1)

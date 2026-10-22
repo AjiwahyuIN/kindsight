@@ -1,0 +1,43 @@
+include ../mixins/solution-card.pug
+
+section#solutions.solutions(aria-labelledby='solutions-title' data-solutions lang='en')
+  .solutions__background(aria-hidden='true')
+    .solutions__grid-horizontal
+      img(src='/src/assets/solutions/grid-horizontal.svg' alt='')
+    .solutions__grid-vertical
+      img(src='/src/assets/solutions/grid-vertical.svg' alt='')
+    .solutions__grid-cards
+      img(src='/src/assets/solutions/grid-cards.svg' alt='')
+    .solutions__fade.solutions__fade--top
+      img(src='/src/assets/solutions/edge-fade.svg' alt='')
+    .solutions__fade.solutions__fade--bottom
+      img(src='/src/assets/solutions/edge-fade.svg' alt='')
+  .solutions__content.container
+    .solutions__header
+      p.solutions__label
+        img(src='/src/assets/solutions/section-marker.svg' alt='' aria-hidden='true')
+        span(data-solutions-label)= solutions.label
+      .solutions__intro
+        h2#solutions-title.solutions__title
+          each line, index in solutions.heading
+            if index > 0
+              br.solutions__title-break
+              = ' '
+            span(data-solutions-heading=index)= line
+        p.solutions__description(data-solutions-description)= solutions.description
+    .solutions__cards
+      each product in solutions.products
+        +solutionCard(product)
+
+dialog#solution-overview.solutions-overview(aria-labelledby='solution-overview-title' aria-describedby='solution-overview-description solution-overview-note' data-solutions-dialog lang='en')
+  .solutions-overview__header
+    p.solutions-overview__eyebrow Kindsight / Solutions
+    +button('Close', { variant: 'light', size: 'sm' })(data-solutions-close)
+  h2#solution-overview-title.solutions-overview__title(data-solutions-overview-title)= solutions.overview.title
+  p#solution-overview-description.solutions-overview__description(data-solutions-overview-description)= solutions.overview.description
+  ul.solutions-overview__topics
+    each topic, index in solutions.overview.topics
+      li(data-solutions-topic=index)
+        h3(data-solutions-topic-title)= topic.title
+        p(data-solutions-topic-description)= topic.description
+  p#solution-overview-note.solutions-overview__note(data-solutions-overview-note)= solutions.overview.note

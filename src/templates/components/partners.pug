@@ -1,0 +1,11 @@
+section#partners.partners(aria-label='Partner organizations' data-partners lang='en')
+  .partners__viewport(data-partners-viewport)
+    .partners__track(data-partners-track)
+      ul.partners__set(data-partners-source aria-label='Partner logos')
+        each partner in partners
+          li.partners__item
+            span.partners__logo(style=getPartnerGeometry(partner))
+              img.partners__image(src=`/src/assets/partners/${partner.file}` alt=partner.name width=partner.width height=partner.height decoding='async')
+  +button('', { variant: 'light', size: 'sm' })(class='partners__control' data-partners-pause aria-label='Pause partner logo animation' aria-pressed='false' hidden)
+    span.partners__control-icon(aria-hidden='true')
+  p.partners__notice(data-partners-notice role='status' hidden)

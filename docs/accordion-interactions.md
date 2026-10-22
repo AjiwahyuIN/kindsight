@@ -1,0 +1,13 @@
+# Smooth accordion — Difference
+
+React Accordion memakai modifier accordion--smooth dan stylesheet khusus. Referensi Pug serta aset plus/minus lama dipertahankan. Penanda baru berupa dua garis CSS: horizontal tetap; vertikal memendek/memudar selama 380 ms. Wadah ikon, padding dan tinggi minimal tombol sama pada kedua state; ikon dekoratif di setiap baris tetap memiliki ruang saat ditutup.
+
+ResizeObserver mengukur heading serta paragraf seluruh item, termasuk panel tertutup, sebelum paint. Tinggi accordion menyediakan ruang untuk deskripsi terpanjang; pergantian tidak meresize body Difference/Insight atau mendorong section berikutnya. Flex-grow 380 ms membagi ruang panel secara kontinu; spacer menerima ruang saat semua ditutup. Opacity/translate kecil pada wrapper deskripsi memiliki overlap 70 ms. CSS mengikuti pilihan terakhir tanpa antrean timer saat klik cepat.
+
+Panel tertutup memakai inert dan aria-hidden, tombol mempertahankan aria-expanded/aria-controls. ArrowUp/Down/Home/End dan Enter/Space tetap tersedia. Reduced motion mematikan transisi. Observer dibersihkan saat unmount; ukuran diperbarui ketika font, breakpoint atau copy berubah. Paragraf tetap menjadi target reveal GSAP sebelumnya; transisi toggle berada pada wrapper terpisah agar tidak berebut transform.
+
+QC browser: desktop panel418px, accordion392px, posisi dokumen About1929,7px tetap sebelum/sesudah toggle, termasuk tutup semua dan klik cepat. Mobile390×844 panel717px dan posisi About1856,9px tetap sebelum/sesudah toggle, tanpa overflow. Keyboard dan reveal normal Difference diperiksa. Build TypeScript frontend/API/Vite lulus, warning bundle >500kB yang sama. Sentuhan perangkat fisik dan emulasi system reduced motion belum diuji. Screenshot accordion-smooth-mobile.png dan accordion-smooth-desktop.png di docs/screenshots/.
+
+Revisi ikon aktif: seluruh item memakai ikon komunitas yang tersedia sebagai fallback; ikon khusus item tetap dipertahankan bila ada. Hanya item aktif menampilkan ikon di samping judul. Collapse memudarkan opacity dan scale selama 380 ms, kemudian visibility menjadi hidden; posisi judul tetap. Reduced motion menonaktifkan transisi ikon. Desktop: tinggi panel418px dan posisi judul267px tetap; mobile390×844: panel717px dan posisi judul101px tetap, tanpa overflow. Build lulus. Screenshot accordion-active-icon.png. Menunggu QC.
+
+Revisi berikutnya menggantikan ruang ikon tetap: item tertutup kini tidak memiliki indentasi ikon. Wrapper ikon bertransisi width0→40px+gap selama380ms, sinkron dengan fade/scale ikon, sehingga judul bergeser halus saat aktif. Gap title-group0; jarak masuk wrapper agar benar-benar hilang saat tertutup. Desktop gap20px, mobile12px, reduced motion tanpa transisi. Build lulus; screenshot accordion-sliding-title.png.

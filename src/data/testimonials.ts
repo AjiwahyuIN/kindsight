@@ -1,0 +1,38 @@
+import type { TestimonialsContent } from '../services/landing-sections-types';
+import asset0 from '../assets/testimonial/portrait.png';
+export const testimonialsContent: TestimonialsContent = {
+  heading: 'Our donors stories',
+  introduction: 'Hear what people have to say about working together. Real moments, real experience, real feedback.',
+  stories: [
+    {
+      id: 'design-story',
+      name: 'Rafatar Norman',
+      rating: '4.9/5',
+      period: '2023-present',
+      quote: '“Kindsight transformed how we identify and engage donors. Our fundraising strategy is now data-driven and far more effective.”',
+      tagline: 'Really love this platform. Good job, guys!',
+      image: asset0,
+      imageAlt: 'Portrait used in the Kindsight testimonial design.',
+    },
+    {
+      id: 'sample-nonprofit',
+      name: 'Example nonprofit team',
+      rating: '4.9/5',
+      period: 'Sample story',
+      quote: '“A clearer view of our supporters helps our team plan conversations and focus on the relationships that matter to our mission.”',
+      tagline: 'Illustrative feedback for this frontend preview.',
+      image: asset0,
+      imageAlt: 'Illustrative portrait reused for a sample story.',
+    },
+    {
+      id: 'sample-education',
+      name: 'Example education team',
+      rating: '4.9/5',
+      period: 'Sample story',
+      quote: '“Bringing our information together gives everyone a shared starting point for building thoughtful, lasting connections with supporters.”',
+      tagline: 'Illustrative feedback for this frontend preview.',
+      image: asset0,
+      imageAlt: 'Illustrative portrait reused for a sample story.',
+    },
+  ],
+};

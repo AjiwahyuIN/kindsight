@@ -1,0 +1,94 @@
+extends ../templates/layouts/base.pug
+include ../templates/mixins/admin-field.pug
+
+block title
+  title Fundraising Management — Kindsight
+
+block content
+  main#main-content.admin-workspace(tabindex='-1' lang='en')
+    header.admin-workspace__header
+      a.admin-workspace__brand(href='/' aria-label='Kindsight home')
+        img(src='/src/assets/brand/kindsight-mark.svg' alt='' width='28' height='28')
+        span Kindsight
+      .admin-workspace__account(data-admin-controls hidden)
+        span(data-admin-user)
+        +button('Dashboard', {href:'/dashboard.html',variant:'outline',size:'sm'})
+        +button('Landing content', {href:'/content.html',variant:'outline',size:'sm'})
+        +button('Sign out', {variant:'outline',size:'sm'})(data-admin-signout)
+    .admin-workspace__gate(role='status' data-admin-gate) Checking your session…
+    .admin-workspace__content(data-admin-workspace hidden)
+      .admin-workspace__intro
+        div
+          p.admin-workspace__eyebrow Kindsight / Administration
+          h1.admin-workspace__title Fundraising management
+          p.admin-workspace__subtitle Your people, your missions, and every contribution.
+      nav.admin-workspace__tabs(aria-label='Manage fundraising')
+        each config, key in adminEntities
+          a.admin-workspace__tab(href='/admin.html?view=' + key data-admin-tab=key)= config.label
+      section.admin-records(aria-labelledby='records-title')
+        .admin-records__heading
+          div
+            h2#records-title(data-records-title) Donors
+            p(data-records-description)
+          +button('Add donor', {size:'sm'})(data-add-record)
+        form.admin-records__filters(data-records-filters role='search')
+          .admin-records__search
+            label(for='records-search') Search records
+            input#records-search(type='search' name='search' maxlength='160' placeholder='Search by name or details')
+          .admin-records__filter
+            label(for='records-archive') View
+            select#records-archive(name='archived')
+              option(value='active') Active records
+              option(value='archived') Archived records
+              option(value='all') All records
+          .admin-records__filter(data-status-filter hidden)
+            label(for='records-status') Status
+            select#records-status(name='status')
+              option(value='') All statuses
+          +button('Search', {variant:'dark',size:'sm',type:'submit'})
+        p.admin-records__feedback(role='status' data-records-feedback)
+        p.admin-records__error(role='alert' data-records-error)
+        +button('Try again', {variant:'outline',size:'sm'})(data-records-retry hidden)
+        .admin-records__scroll(tabindex='0' role='region' aria-label='Fundraising records table')
+          table.admin-records__table
+            caption.admin-records__caption(data-records-caption) Donors
+            thead
+              tr(data-records-columns)
+            tbody(data-records-rows)
+        .admin-records__pagination
+          label.admin-records__page-size(for='records-page-size')
+            | Rows per page
+            select#records-page-size
+              option(value='10') 10
+              option(value='25') 25
+              option(value='50') 50
+          span(data-records-page)
+          .admin-records__page-actions
+            +button('Previous', {variant:'outline',size:'sm'})(data-page-previous)
+            +button('Next', {variant:'outline',size:'sm'})(data-page-next)
+
+    each config, key in adminEntities
+      dialog.admin-editor(aria-labelledby=key + '-editor-title' data-editor=key)
+        form(data-editor-form=key)
+          .admin-editor__header
+            h2(id=key + '-editor-title' data-editor-title) Add #{config.singular}
+            +button('Close', {variant:'light',size:'sm'})(data-editor-close)
+          p.admin-editor__note= key === 'donors' ? 'Required fields are marked *.' : 'Required fields are marked *. Amounts are recorded in USD.'
+          .admin-editor__fields
+            each field in config.fields
+              +adminField(field, key)
+          p.admin-editor__feedback(role='alert' data-editor-feedback)
+          .admin-editor__actions
+            +button('Cancel', {variant:'outline',size:'sm'})(data-editor-close)
+            +button('Save', {size:'sm',type:'submit'})(data-editor-save)
+
+    dialog.admin-confirm(aria-labelledby='archive-title' aria-describedby='archive-description' data-archive-dialog)
+      h2#archive-title Archive record?
+      p#archive-description This record will be hidden from active lists. Existing donation history stays available, and you can restore the record later.
+      p.admin-editor__feedback(role='alert' data-archive-feedback)
+      .admin-editor__actions
+        +button('Cancel', {variant:'outline',size:'sm'})(data-archive-cancel)
+        +button('Archive', {variant:'dark',size:'sm'})(data-archive-confirm)
+
+block scripts
+  script(type='module' src='/src/scripts/admin.js')

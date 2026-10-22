@@ -1,0 +1,18 @@
+include ../mixins/button.pug
+
+doctype html
+html(lang='id')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    meta(name='theme-color' content='#f4f4f4')
+    block title
+      title Kindsight
+    block head
+  body
+    a.skip-link(href='#main-content') Lewati ke konten utama
+    block header
+    block content
+      main#main-content.container(tabindex='-1')
+    script(type='module' src='/src/scripts/main.js')
+    block scripts

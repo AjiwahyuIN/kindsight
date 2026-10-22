@@ -1,0 +1,61 @@
+extends ../templates/layouts/base.pug
+
+block title
+  title Landing Content — Kindsight
+
+block content
+  main#main-content.admin-workspace(tabindex='-1' lang='en')
+    header.admin-workspace__header
+      a.admin-workspace__brand(href='/' aria-label='Kindsight home')
+        img(src='/src/assets/brand/kindsight-mark.svg' alt='' width='28' height='28')
+        span Kindsight
+      .admin-workspace__account(data-content-account hidden)
+        span(data-content-user)
+        +button('Fundraising',{href:'/admin.html',variant:'outline',size:'sm'})
+        +button('Dashboard',{href:'/dashboard.html',variant:'outline',size:'sm'})
+        +button('Sign out',{variant:'outline',size:'sm'})(data-content-logout)
+    p.admin-workspace__gate(role='status' data-content-gate) Checking your session…
+    .admin-workspace__content(data-content-workspace hidden)
+      .admin-workspace__intro
+        p.admin-workspace__eyebrow Kindsight / Landing content
+        h1.admin-workspace__title Landing editor
+        p.admin-workspace__subtitle Edit content while keeping the approved page layout.
+      nav.admin-workspace__tabs(aria-label='Landing sections')
+        a.admin-workspace__tab(href='/content.html?section=navbar' data-section-tab='navbar') Navbar
+        a.admin-workspace__tab(href='/content.html?section=footer' data-section-tab='footer') Footer
+        a.admin-workspace__tab(href='/content.html?section=hero' data-section-tab='hero') Hero
+        a.admin-workspace__tab(href='/content.html?section=partners' data-section-tab='partners') Logo Partners
+        a.admin-workspace__tab(href='/content.html?section=difference' data-section-tab='difference') Difference
+      section.admin-records.content-editor(aria-labelledby='content-title')
+        .admin-records__heading
+          div
+            h2#content-title(data-content-title) Content
+            p(data-content-help) Changes publish immediately when saved. Empty destinations keep the existing preview dialog.
+          a.button.button--outline.button--sm(href='/' target='_blank' rel='noopener') Open landing
+        p.content-editor__note(data-content-note) Use an anchor (such as #about), a local /path, or a full http(s) URL. Logos and page layout are fixed in this editor. Demo and newsletter forms remain previews.
+        p.content-editor__status(role='status' data-content-status)
+        p.content-editor__error(role='alert' data-content-error)
+        form.content-editor__upload(data-logo-upload hidden)
+          h3 Upload a new logo
+          p.content-editor__note PNG, JPG or WebP, up to 2 MB. Transparent PNG is recommended. Uploading adds a local asset; choose it below and save to publish.
+          .content-editor__group
+            .admin-field
+              label(for='logo-upload-name') Organization name
+              input#logo-upload-name(type='text' name='name' required maxlength='100' autocomplete='organization')
+            .admin-field
+              label(for='logo-upload-file') Logo file
+              input#logo-upload-file(type='file' name='logo' required accept='image/png,image/jpeg,image/webp' aria-describedby='logo-upload-help')
+              p#logo-upload-help PNG, JPG or WebP · Maximum 2 MB
+          +button('Upload logo',{type:'submit',variant:'outline',size:'sm'})(data-logo-upload-button disabled)
+          p.content-editor__status(role='status' data-logo-upload-status)
+          p.content-editor__error(role='alert' data-logo-upload-error)
+          img.content-editor__upload-preview(data-logo-upload-preview hidden alt='')
+        form(data-content-form hidden)
+          .content-editor__actions
+            +button('Reset unsaved changes',{variant:'outline',size:'sm'})(data-content-reset)
+            +button('Save and publish',{type:'submit',size:'sm'})(data-content-save)
+          fieldset.content-editor__fields(data-content-fields)
+        +button('Reload saved content',{variant:'outline',size:'sm'})(data-content-reload)
+
+block scripts
+  script(type='module' src='/src/scripts/content-editor.js')

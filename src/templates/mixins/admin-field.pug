@@ -1,0 +1,21 @@
+mixin adminField(field, entity)
+  - const id = entity + '-' + field.name
+  .admin-field
+    label(for=id)
+      = field.label
+      if field.required
+        span.admin-field__required(aria-hidden='true')  *
+    if field.type === 'textarea'
+      textarea(id=id name=field.name rows='3' maxlength=field.max aria-describedby=id + '-error')
+    else if field.type === 'select' || field.type === 'reference'
+      select(id=id name=field.name required=field.required aria-describedby=id + '-error' data-reference=field.source)
+        if field.type === 'reference'
+          option(value='')= field.empty
+        else
+          each choice in field.choices
+            option(value=choice)= choice.charAt(0).toUpperCase() + choice.slice(1)
+    else
+      input(id=id name=field.name type=field.type required=field.required maxlength=field.max inputmode=field.money ? 'decimal' : undefined pattern=field.money ? '(0|[1-9][0-9]{0,12})([.][0-9]{1,2})?' : undefined placeholder=field.money ? '0.00' : undefined aria-describedby=id + '-error' step=field.type === 'datetime-local' ? '1' : undefined)
+    if field.hint
+      p.admin-field__hint= field.hint
+    p.admin-field__error(id=id + '-error' data-field-error=field.name)

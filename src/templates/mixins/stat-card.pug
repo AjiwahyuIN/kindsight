@@ -1,0 +1,7 @@
+//- Use inside a dl. Keep values as formatted content, without business calculations.
+mixin statCard(statistic)
+  .stat-card(data-stat-card=statistic.id)
+    dt.stat-card__label(data-stat-label)= statistic.label
+    dd.stat-card__value
+      span(data-stat-value)= statistic.value
+      span.stat-card__suffix(data-stat-suffix)= statistic.suffix

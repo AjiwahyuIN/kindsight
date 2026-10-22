@@ -1,0 +1,68 @@
+header.site-header(data-navbar lang='en')
+  .site-header__inner.container
+    a.site-header__brand(href='/' aria-label='Kindsight home')
+      img.site-header__mark(src='/src/assets/brand/kindsight-mark.svg' alt='' aria-hidden='true')
+      span.site-header__wordmark(data-nav-brand) Kindsight
+
+    button.site-header__toggle(type='button' aria-label='Open navigation' aria-controls='site-navigation' aria-expanded='false' data-nav-toggle)
+      span.site-header__toggle-lines(aria-hidden='true')
+
+    #site-navigation.site-header__menu(data-nav-menu)
+      nav.site-header__navigation(aria-label='Main navigation')
+        ul.site-header__list
+          each item in [{ id: 'serve', label: 'Who we Serve', caret: true }, { id: 'product', label: 'Product', badge: 'New' }, { id: 'company', label: 'Company' }, { id: 'resources', label: 'Resources', caret: true }]
+            li.site-header__item
+              if item.id === 'company'
+                button.site-header__trigger(type='button' data-nav-preview='company' data-nav-label=item.id disabled)= item.label
+              else
+                button.site-header__trigger(type='button' aria-expanded='false' aria-controls=`nav-${item.id}` data-nav-disclosure=item.id disabled)
+                  span(data-nav-label=item.id)= item.label
+                  if item.badge
+                    span.site-header__badge(data-nav-badge)= item.badge
+                  if item.caret
+                    span.site-header__caret(aria-hidden='true')
+                      img(src='/src/assets/icons/caret-right.svg' alt='')
+                ul.site-header__dropdown(id=`nav-${item.id}` data-nav-panel=item.id hidden)
+
+      .site-header__actions
+        +button('Get a Demo')(class='site-header__demo' data-nav-demo)
+        .site-header__account
+          +button('', { variant: 'light' })(class='site-header__utility' aria-label='Open account menu' aria-expanded='false' aria-controls='nav-account' data-nav-disclosure='account' disabled)
+            img(src='/src/assets/icons/navbar-utility.svg' alt='' aria-hidden='true')
+          #nav-account.site-header__dropdown.site-header__dropdown--account(data-nav-panel='account' hidden)
+            p.site-header__account-label(role='status' data-nav-account-status) Checking your session…
+            p.site-header__account-name(data-nav-account-name hidden)
+            p.site-header__account-email(data-nav-account-email hidden)
+            +button('Go to dashboard', {href:'/dashboard.html',variant:'dark',size:'sm'})(data-nav-dashboard hidden)
+            +button('Sign in', {href:'/login.html',variant:'dark',size:'sm'})(data-nav-signin hidden)
+            button.site-header__option(type='button' data-nav-account-retry hidden) Try again
+
+  p.site-header__notice(role='status' data-nav-notice hidden)
+
+dialog.site-header__dialog(aria-labelledby='nav-dialog-title' aria-describedby='nav-dialog-description' data-nav-dialog lang='en')
+  .site-header__dialog-header
+    p.site-header__dialog-eyebrow Kindsight
+    +button('Close', { variant: 'light', size: 'sm' })(data-nav-dialog-close)
+  h2#nav-dialog-title.site-header__dialog-title(data-nav-dialog-title)
+  p#nav-dialog-description.site-header__dialog-description(data-nav-dialog-description)
+  p.site-header__preview-note(data-nav-preview-note) Navigation preview — the destination page is not part of this showcase yet.
+
+  form.site-header__form(data-nav-demo-form hidden)
+    p.site-header__preview-note This is a local preview. Your details will not be sent or saved.
+    label.site-header__field
+      span Full name
+      input.site-header__input(name='name' autocomplete='name' maxlength='100' required)
+    label.site-header__field
+      span Work email
+      input.site-header__input(type='email' name='email' autocomplete='email' maxlength='254' required)
+    label.site-header__field
+      span Organization (optional)
+      input.site-header__input(name='organization' autocomplete='organization' maxlength='150')
+    +button('Preview demo request', { type: 'submit' })
+  p.site-header__feedback(role='status' data-nav-demo-feedback hidden)
+
+template(data-nav-option-template)
+  li
+    button.site-header__option(type='button')
+      span.site-header__option-label
+      span.site-header__option-description

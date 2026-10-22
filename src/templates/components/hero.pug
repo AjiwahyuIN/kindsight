@@ -1,0 +1,38 @@
+section.hero(aria-labelledby='hero-title' data-hero lang='en')
+  .hero__background(aria-hidden='true')
+  .hero__content.container
+    .hero__social-proof
+      .hero__avatars(aria-hidden='true')
+        each n in [1, 2, 3]
+          img.hero__avatar(src=`/src/assets/images/hero/supporter-${n}.png` alt='' width='16' height='16')
+      span(data-hero-text='socialProof')= hero.socialProof
+    h1#hero-title.hero__title(aria-label=`${hero.heading} ${hero.connector} ${hero.highlight}`)
+      span(data-hero-text='heading')= hero.heading
+      br.hero__title-break
+      = ' '
+      span(data-hero-text='connector')= hero.connector
+      = ' '
+      span.hero__highlight(data-hero-text='highlight')= hero.highlight
+    p.hero__description(data-hero-text='description')= hero.description
+    .hero__actions
+      +button('Request a Demo', { variant: 'dark' })(class='hero__cta' data-hero-demo aria-haspopup='dialog')
+        img(src='/src/assets/icons/hero/cta-caret.svg' alt='' aria-hidden='true')
+      +button('Watch Overview', { variant: 'light' })(class='hero__cta' data-hero-overview aria-haspopup='dialog')
+    p.hero__notice(role='status' data-hero-notice hidden)
+
+  figure.hero__preview(role='img' aria-label='Illustrative Kindsight dashboard showing fundraising progress, major gifts, AI insights, and top prospects.')
+    .hero__preview-viewport
+      include dashboard-preview.pug
+
+dialog.hero__overview(aria-labelledby='hero-overview-title' aria-describedby='hero-overview-note' data-hero-dialog lang='en')
+  .hero__overview-header
+    p.hero__overview-eyebrow Kindsight / Overview
+    +button('Close', { variant: 'light', size: 'sm' })(data-hero-close)
+  p#hero-overview-note.hero__overview-note Video is not available in this preview. Explore a quick introduction below.
+  p.hero__overview-count(data-hero-step-count aria-live='polite')
+  .hero__overview-slide(aria-live='polite' aria-atomic='true')
+    h2#hero-overview-title.hero__overview-title(data-hero-step-title)
+    p.hero__overview-description(data-hero-step-description)
+  .hero__overview-controls
+    +button('Previous', { variant: 'outline', size: 'sm' })(data-hero-previous)
+    +button('Next', { variant: 'dark', size: 'sm' })(data-hero-next)

@@ -1,0 +1,45 @@
+- const firstStory = testimonial.stories[0]
+section#testimonials.testimonial(aria-labelledby='testimonial-title' aria-roledescription='carousel' data-testimonial lang='en')
+  .testimonial__panel
+    .testimonial__ornament(aria-hidden='true')
+      img(src='/src/assets/testimonial/corner-top.svg' alt='')
+      span.testimonial__rule
+        img(src='/src/assets/testimonial/rule.svg' alt='')
+      img(src='/src/assets/testimonial/corner-top.svg' alt='')
+    .testimonial__content
+      .testimonial__left
+        .testimonial__intro
+          h2#testimonial-title.testimonial__heading
+            img(src='/src/assets/testimonial/label-dot.svg' alt='' aria-hidden='true')
+            span(data-testimonial-heading)= testimonial.heading
+          p.testimonial__description(data-testimonial-introduction)= testimonial.introduction
+        .testimonial__identity
+          .testimonial__author
+            .testimonial__portrait
+              img(src=firstStory.image alt=firstStory.imageAlt width='1200' height='784' loading='lazy' decoding='async' data-testimonial-photo)
+            .testimonial__meta
+              .testimonial__byline
+                .testimonial__rating
+                  span(data-testimonial-rating)= firstStory.rating
+                  img(src='/src/assets/testimonial/stars.svg' alt='' aria-hidden='true')
+                p.testimonial__name(data-testimonial-name)= firstStory.name
+              p.testimonial__count(data-testimonial-count)= `01/${String(testimonial.stories.length).padStart(2, '0')}`
+          .testimonial__controls(data-testimonial-controls aria-label='Story navigation')
+            +button('', { variant: 'light', size: 'sm' })(class='testimonial__arrow testimonial__arrow--previous' aria-label='Previous testimonial' data-testimonial-previous disabled)
+              img(src='/src/assets/testimonial/arrow-previous.svg' alt='' aria-hidden='true')
+            +button('', { variant: 'light', size: 'sm' })(class='testimonial__arrow' aria-label='Next testimonial' data-testimonial-next disabled=testimonial.stories.length < 2)
+              img(src='/src/assets/testimonial/arrow-next.svg' alt='' aria-hidden='true')
+      .testimonial__story
+        .testimonial__story-heading
+          img(src='/src/assets/testimonial/quote.svg' alt='' aria-hidden='true')
+          p.testimonial__period(data-testimonial-period)= firstStory.period
+        .testimonial__quote-group
+          blockquote.testimonial__quote
+            p(data-testimonial-quote)= firstStory.quote
+          p.testimonial__tagline(data-testimonial-tagline)= firstStory.tagline
+    .testimonial__ornament(aria-hidden='true')
+      img(src='/src/assets/testimonial/corner-bottom.svg' alt='')
+      span.testimonial__rule
+        img(src='/src/assets/testimonial/rule.svg' alt='')
+      img(src='/src/assets/testimonial/corner-bottom.svg' alt='')
+  p.testimonial__announcement(role='status' aria-atomic='true' data-testimonial-announcement)

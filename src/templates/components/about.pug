@@ -1,0 +1,29 @@
+include ../mixins/stat-card.pug
+
+section#about.about(aria-labelledby='about-title' data-about lang='en')
+  .about__background(aria-hidden='true')
+    .about__grid-horizontal
+      img(src='/src/assets/about/grid-horizontal.svg' alt='')
+    .about__grid-vertical
+      img(src='/src/assets/about/grid-vertical.svg' alt='')
+    .about__grid-cards
+      img(src='/src/assets/about/grid-cards.svg' alt='')
+    .about__fade.about__fade--top
+      img(src='/src/assets/about/fade-top.svg' alt='')
+    .about__fade.about__fade--bottom
+      img(src='/src/assets/about/fade-bottom.svg' alt='')
+  .about__content.container
+    .about__header
+      p.about__label
+        img(src='/src/assets/about/section-marker.svg' alt='' aria-hidden='true')
+        span(data-about-label)= about.label
+      h2#about-title.about__title
+        each line, index in about.heading
+          if index > 0
+            br.about__title-break
+            = ' '
+          span(data-about-heading=index)= line
+      p.about__description(data-about-description)= about.description
+    dl.about__statistics(aria-label='Kindsight at a glance')
+      each statistic in about.statistics
+        +statCard(statistic)

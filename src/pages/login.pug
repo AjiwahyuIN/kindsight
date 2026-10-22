@@ -1,0 +1,52 @@
+extends ../templates/layouts/base.pug
+
+block title
+  title Admin Sign In — Kindsight
+
+block content
+  main#main-content.admin-login(tabindex='-1' lang='en')
+    .admin-login__shell
+      aside.admin-login__intro
+        a.admin-login__brand(href='/' aria-label='Kindsight home')
+          img(src='/src/assets/brand/kindsight-mark.svg' alt='' width='32' height='32')
+          span Kindsight
+        .admin-login__message
+          p.admin-login__eyebrow Built around your mission
+          h1.admin-login__headline A little insight.<br>A greater impact.
+          p.admin-login__description Bring your fundraising work together, and focus on the people who move your mission forward.
+        p.admin-login__caption Care. Community. Commitment.
+      section.admin-login__panel(aria-labelledby='login-title' data-login)
+        .admin-login__content
+          p.admin-login__eyebrow Kindsight / Admin
+          h2#login-title.admin-login__title Welcome back.
+          p.admin-login__subtitle(data-login-subtitle) Sign in to your admin account.
+          p.admin-login__status(role='status' aria-live='polite' data-login-status) Checking your session…
+          form.admin-login__form(data-login-form hidden)
+            .admin-login__field
+              label(for='admin-email') Email address
+              input#admin-email(name='email' type='email' autocomplete='username' required maxlength='254' placeholder='you@example.com')
+            .admin-login__field
+              label(for='admin-password') Password
+              .admin-login__password
+                input#admin-password(name='password' type='password' autocomplete='current-password' required maxlength='128' aria-describedby='login-error')
+                button.admin-login__visibility(type='button' data-toggle-password aria-controls='admin-password' aria-pressed='false') Show
+            p#login-error.admin-login__error(role='alert' data-login-error)
+            +button('Sign in', {type: 'submit'})(class='admin-login__submit' data-login-submit)
+          .admin-login__account(data-login-account hidden)
+            .admin-login__success-mark(aria-hidden='true') ✓
+            h3.admin-login__account-title You’re signed in.
+            dl.admin-login__identity
+              dt Name
+              dd(data-admin-name)
+              dt Email
+              dd(data-admin-email)
+            p.admin-login__next Your admin session is ready. Manage donors, campaigns, and donations from your workspace.
+            +button('Open dashboard', {href:'/dashboard.html'})
+            +button('Open management', {href:'/admin.html'})(data-open-management)
+            +button('Edit landing content', {href:'/content.html',variant:'outline'})
+            +button('Sign out', {variant: 'dark'})(data-login-logout)
+          +button('Try again', {variant: 'outline'})(data-login-retry hidden)
+          a.admin-login__back(href='/') Back to Kindsight
+
+block scripts
+  script(type='module' src='/src/scripts/login.js')

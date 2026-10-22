@@ -1,0 +1,30 @@
+import { initNavbar } from './components/navbar.js';
+import { initHero } from './components/hero.js';
+import { initPartners } from './components/partners.js';
+import { initDifference } from './components/difference.js';
+import { initAbout } from './components/about.js';
+import { initSolutions } from './components/solutions.js';
+import { initTestimonial } from './components/testimonial.js';
+import '../styles/components/_navbar.scss';
+import '../styles/components/_hero.scss';
+import '../styles/components/_dashboard-preview.scss';
+import '../styles/components/_partners.scss';
+import '../styles/components/_accordion.scss';
+import '../styles/components/_difference.scss';
+import '../styles/components/_stat-card.scss';
+import '../styles/components/_about.scss';
+import '../styles/components/_solution-card.scss';
+import '../styles/components/_solutions.scss';
+import '../styles/components/_testimonial.scss';
+
+const navbar = await initNavbar(document.querySelector('[data-navbar]'));
+await initHero(document.querySelector('[data-hero]'), navbar);
+await initPartners(document.querySelector('[data-partners]'));
+await initDifference(document.querySelector('[data-difference]'));
+await initAbout(document.querySelector('[data-about]'));
+await initSolutions(document.querySelector('[data-solutions]'));
+await initTestimonial(document.querySelector('[data-testimonial]'));
+
+import { initLandingEnd } from './components/landing-end.js';
+import '../styles/components/_landing-end.scss';
+await initLandingEnd();

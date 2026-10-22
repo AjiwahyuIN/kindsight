@@ -1,0 +1,12 @@
+import type { NavigationContent } from './navigation-types';
+import type { FooterContent } from './footer-types';
+import type { HeroContent } from './hero-types';
+import type { DifferenceContent } from './difference-types';
+import type { AboutContent, SolutionsContent, TestimonialsContent, MissionsContent, SectorsContent } from './landing-sections-types';
+export type ContentMap = { navbar: NavigationContent; footer: FooterContent; hero: HeroContent; partners: { items: { logo: string; name: string }[] }; difference: DifferenceContent; about: AboutContent; solutions: SolutionsContent; testimonials: TestimonialsContent; missions: MissionsContent; sectors: SectorsContent };
+export const contentSections = ['navbar','hero','partners','difference','about','solutions','testimonials','missions','sectors','footer'] as const;
+export type ContentSection = typeof contentSections[number];
+export type JsonValue = string | number | boolean | null | JsonObject | JsonValue[];
+export type JsonObject = { [key: string]: JsonValue };
+export type ContentDocument = { content: JsonObject; revision: number | string };
+export type FieldSchema = { kind: 'text'; label: string; max: number; required?: boolean; multiline?: boolean; href?: boolean; options?: { value: string; label: string }[]; stableId?: boolean } | { kind: 'locked'; value?: JsonValue } | { kind: 'object'; fields: Record<string, FieldSchema> } | { kind: 'array'; label: string; item: FieldSchema; min: number; max: number; reorder?: boolean; variants?: Record<string, FieldSchema>; indexed?: FieldSchema[]; template: JsonValue };

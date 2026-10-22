@@ -1,0 +1,109 @@
+//- Decorative, non-interactive Hero illustration. Not the functional dashboard page.
+.dashboard-preview(aria-hidden='true')
+  .dashboard-preview__topbar
+    .dashboard-preview__brand
+      span.dashboard-preview__brand-mark
+        img(src='/src/assets/brand/kindsight-mark.svg' alt='')
+      span Kindsight
+    .dashboard-preview__navigation
+      span.dashboard-preview__selected
+        span.dashboard-preview__icon
+          img(src='/src/assets/icons/hero/home.svg' alt='')
+        | Dashboard
+      each n in [1, 2, 3, 4, 5]
+        span.dashboard-preview__navigation-dot
+          img(src=`/src/assets/icons/hero/nav-${n}.svg` alt='')
+    .dashboard-preview__profile
+      img(src='/src/assets/images/hero/profile.png' alt='' width='28' height='28')
+      span
+        strong Rafatar Albert
+        small rafatar@example.com
+  .dashboard-preview__toolbar
+    p.dashboard-preview__title Fundraising Dashboard
+    .dashboard-preview__tools
+      span.dashboard-preview__date 14 November 2026
+      .dashboard-preview__people
+        each n in [1, 2, 3]
+          img(src=`/src/assets/images/hero/supporter-${n}.png` alt='' width='22' height='22')
+      span Share
+  .dashboard-preview__grid
+    .dashboard-preview__card.dashboard-preview__raised
+      .dashboard-preview__card-header
+        span.dashboard-preview__icon
+          img(src='/src/assets/icons/hero/chart-up.svg' alt='')
+        span.dashboard-preview__label Total raised
+        span.dashboard-preview__period This Week
+      .dashboard-preview__amount
+        strong(data-hero-metric='raised')= hero.preview.raised
+        span.dashboard-preview__cents(data-hero-metric='cents')= hero.preview.cents
+        span.dashboard-preview__growth(data-hero-metric='growth')= hero.preview.growth
+      p.dashboard-preview__progress Good progress!
+      .dashboard-preview__chart
+        .dashboard-preview__bars
+          each height, i in hero.preview.bars
+            .dashboard-preview__bar-column
+              span.dashboard-preview__bar(style=`--bar-height: ${height}%` class=i === 2 ? 'dashboard-preview__bar--active' : '')
+              small= ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][i]
+        .dashboard-preview__curve
+          img(src='/src/assets/icons/hero/chart-curve.svg' alt='')
+        .dashboard-preview__tooltip
+          small 10 NOVEMBER
+          span Total: 
+            strong $2,425.87
+    .dashboard-preview__right
+      .dashboard-preview__cards
+        .dashboard-preview__card
+          .dashboard-preview__card-header
+            span.dashboard-preview__icon
+              img(src='/src/assets/icons/hero/major-gift.svg' alt='')
+            span.dashboard-preview__label Major gift
+          .dashboard-preview__legend
+            span Identified
+            span Qualified
+            span Active Ask
+          .dashboard-preview__gauge
+            img.dashboard-preview__gauge-art(src='/src/assets/icons/hero/pipeline-gauge.svg' alt='')
+            .dashboard-preview__gauge-value
+              strong(data-hero-metric='majorGifts')= hero.preview.majorGifts
+              small Total
+          .dashboard-preview__forecast
+            div
+              small Forecasted
+              p
+                strong(data-hero-metric='forecasted')= hero.preview.forecasted
+                span M
+            div
+              small Pending ask
+              p
+                strong(data-hero-metric='pending')= hero.preview.pending
+                span K
+        .dashboard-preview__card.dashboard-preview__insight
+          .dashboard-preview__card-header
+            span.dashboard-preview__insight-dot
+              img(src='/src/assets/icons/hero/ai-bulb.svg' alt='')
+            span.dashboard-preview__label AI insight
+            span.dashboard-preview__generate Generate
+          p.dashboard-preview__insight-value
+            strong(data-hero-metric='insights')= hero.preview.insights
+            span +
+          p.dashboard-preview__insight-tag High-potential donors identified this week
+          p.dashboard-preview__insight-copy Our intelligence engine continuously analyzes donation history and identifies donors who are most likely to make larger donations.
+          p.dashboard-preview__updated Updated 2 hours ago
+      .dashboard-preview__card.dashboard-preview__prospects
+        .dashboard-preview__card-header
+          span.dashboard-preview__icon
+            img(src='/src/assets/icons/hero/prospects.svg' alt='')
+          span.dashboard-preview__label Top prospects
+          span.dashboard-preview__search Search
+        .dashboard-preview__table-header
+          each label in ['Name', 'Capacity', 'Last Gift', 'Engagement', 'Status']
+            span= label
+        each prospect in hero.preview.prospects
+          .dashboard-preview__row
+            span.dashboard-preview__person
+              img(src=`/src/assets/images/hero/${prospect.image}` alt='' width='25' height='25')
+              span= prospect.name
+            span= prospect.capacity
+            span= prospect.gift
+            span= prospect.engagement
+            span.dashboard-preview__status= prospect.status

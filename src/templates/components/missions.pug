@@ -1,0 +1,35 @@
+include ../mixins/section-label.pug
+
+section#missions.missions(aria-labelledby='missions-title' lang='en')
+  +endBackground('missions', '41c40.svg', '39007.svg')
+  .container.missions__content
+    .missions__header
+      +sectionLabel(ending.missions.label)
+      h2#missions-title.missions__title(data-end-text='missions.heading')= ending.missions.heading
+    .missions__body
+      .missions__copy
+        p.missions__description
+          span(data-end-text='missions.introduction')= ending.missions.introduction
+          strong(data-end-text='missions.emphasis')= ending.missions.emphasis
+        .missions__benefits
+          each benefit, index in ending.missions.benefits
+            .missions__benefit
+              .missions__icon(class=index === 1 ? 'missions__icon--peach' : '')
+                img(src='/src/assets/missions/' + benefit.icon alt='' aria-hidden='true')
+              p(data-end-text='missions.benefits.' + index + '.description')= benefit.description
+      figure.missions__visual(aria-label='Illustrative donor metrics: 97 plus donors and 54 percent growth; sample data.')
+        img.missions__photo(src='/src/assets/missions/165b2.png' alt='People working together to support their community' loading='lazy')
+        .missions__metric(aria-hidden='true')
+          .missions__metric-heading
+            p.missions__donors
+              span(data-end-text='missions.donors')= ending.missions.donors
+              span +
+            p(data-end-text='missions.donorLabel')= ending.missions.donorLabel
+          .missions__gauge
+            img.missions__track(src='/src/assets/missions/67f1e.svg' alt='')
+            img.missions__arc(src='/src/assets/missions/9ce68.svg' alt='')
+            .missions__gauge-pointer
+              img(src='/src/assets/missions/9a65f.svg' alt='')
+            .missions__gauge-copy
+              strong(data-end-text='missions.growth')= ending.missions.growth
+              p(data-end-text='missions.growthLabel')= ending.missions.growthLabel

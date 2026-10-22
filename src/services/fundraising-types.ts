@@ -1,0 +1,10 @@
+export const entities = ['donors', 'campaigns', 'donations'] as const;
+export type Entity = typeof entities[number];
+type Base = { id: string; archived: boolean; revision: number; createdAt: string; updatedAt: string };
+export type DonorRecord = Base & { kind: 'donors'; name: string; email: string; phone: string; organization: string };
+export type CampaignRecord = Base & { kind: 'campaigns'; name: string; description: string; target_amount: string; starts_on: string; ends_on: string; status: 'draft' | 'active' | 'completed' };
+export type DonationRecord = Base & { kind: 'donations'; donor_id: string; campaign_id: string; amount: string; status: 'pending' | 'received' | 'cancelled'; received_at: string; expected_at: string; note: string };
+export type ManagedRecord = DonorRecord | CampaignRecord | DonationRecord;
+export type FundraisingState = { donors: DonorRecord[]; campaigns: CampaignRecord[]; donations: DonationRecord[] };
+export type RecordDraft = Record<string, string>;
+export type RecordFilters = { page: number; pageSize: number; search: string; archived: 'active' | 'archived' | 'all'; status: string };

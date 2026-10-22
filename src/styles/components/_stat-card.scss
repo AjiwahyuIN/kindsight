@@ -1,0 +1,37 @@
+.stat-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--stat-card-gap, var(--space-15));
+  padding: var(--space-6);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+
+  &__value {
+    order: -1;
+    margin: 0;
+    font-size: var(--stat-card-value-size, var(--font-size-stat));
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    letter-spacing: var(--letter-spacing-heading);
+    white-space: nowrap;
+  }
+
+  &__suffix {
+    color: var(--color-brand);
+    letter-spacing: -0.01em;
+  }
+
+  &__label {
+    width: var(--stat-card-label-width, 12rem);
+    max-width: 100%;
+    color: var(--color-text-subtle);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-body);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+}

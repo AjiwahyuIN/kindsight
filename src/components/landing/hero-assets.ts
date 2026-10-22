@@ -1,0 +1,15 @@
+import supporter1 from '../../assets/images/hero/supporter-1.png';
+import supporter2 from '../../assets/images/hero/supporter-2.png';
+import supporter3 from '../../assets/images/hero/supporter-3.png';
+import profile from '../../assets/images/hero/profile.png';
+import prospect1 from '../../assets/images/hero/prospect-1.png';
+import prospect2 from '../../assets/images/hero/prospect-2.png';
+import nav1 from '../../assets/icons/hero/nav-1.svg';
+import nav2 from '../../assets/icons/hero/nav-2.svg';
+import nav3 from '../../assets/icons/hero/nav-3.svg';
+import nav4 from '../../assets/icons/hero/nav-4.svg';
+import nav5 from '../../assets/icons/hero/nav-5.svg';
+export const supporters = [supporter1, supporter2, supporter3];
+export const previewNavigation = [nav1, nav2, nav3, nav4, nav5];
+export const previewProfile = profile;
+export const prospectImages = { 'prospect-1': prospect1, 'prospect-2': prospect2 };

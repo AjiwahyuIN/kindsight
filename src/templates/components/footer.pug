@@ -1,0 +1,44 @@
+footer#footer.site-footer(lang='en')
+  .site-footer__panel
+    .site-footer__ornament(aria-hidden='true')
+      img(src='/src/assets/footer/c810a.svg' alt='')
+      .site-footer__rule
+        img(src='/src/assets/footer/bf1ae.svg' alt='')
+      img(src='/src/assets/footer/c810a.svg' alt='')
+    a.site-footer__brand(href='#' aria-label='Kindsight home')
+      img(src='/src/assets/footer/44669.svg' alt='')
+      span Kindsight
+    .site-footer__body
+      .site-footer__newsletter
+        h2#newsletter-title(data-end-text='footer.heading')= ending.footer.heading
+        form.site-footer__form(data-newsletter aria-labelledby='newsletter-title')
+          .site-footer__email
+            label.sr-only(for='newsletter-email') Your email
+            input#newsletter-email(type='email' name='email' placeholder='Your email' autocomplete='email' required aria-describedby='newsletter-description newsletter-status')
+            button(type='submit' aria-label='Preview newsletter subscription')
+              img(src='/src/assets/footer/52599.svg' alt='')
+          p#newsletter-description(data-end-text='footer.description')= ending.footer.description
+          p#newsletter-status.site-footer__status(role='status')
+      nav.site-footer__navigation(aria-label='Footer')
+        each group in ending.footer.groups
+          .site-footer__group
+            h3= group.title
+            ul
+              each label in group.links
+                li
+                  if ending.footer.destinations[label]
+                    a(href=ending.footer.destinations[label])= label
+                  else
+                    button(type='button' data-footer-preview=label aria-haspopup='dialog')= label
+    .site-footer__bottom
+      p(data-end-text='footer.copyright')= ending.footer.copyright
+      .site-footer__legal
+        each label in ending.footer.legal
+          button(type='button' data-footer-preview=label aria-haspopup='dialog')= label
+    p.site-footer__wordmark(aria-hidden='true') Kindsight
+
+dialog#landing-preview.landing-preview(aria-labelledby='landing-preview-title' aria-describedby='landing-preview-description landing-preview-note' lang='en')
+  +button('Close', { variant: 'light', size: 'sm' })(data-end-close)
+  h2#landing-preview-title
+  p#landing-preview-description
+  p#landing-preview-note Local preview. Detailed content, destinations, and business definitions will be confirmed before API integration.

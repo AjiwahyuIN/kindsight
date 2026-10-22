@@ -1,0 +1,24 @@
+mixin solutionCard(product)
+  article.solution-card(class=product.featured ? 'solution-card--featured' : null data-solution=product.id aria-labelledby=`solution-${product.id}-title`)
+    .solution-card__content
+      .solution-card__icon(aria-hidden='true')
+        span.solution-card__icon-slot
+          img(class=`solution-card__symbol--${product.id}` src=product.icon alt='' data-solution-icon)
+      .solution-card__details
+        .solution-card__copy
+          h3.solution-card__title(id=`solution-${product.id}-title` data-solution-title)= product.title
+          p.solution-card__description(data-solution-description)= product.description
+        if product.cta
+          +button(product.cta, { variant: 'primary' })(class='solution-card__cta' data-solution-learn=product.id aria-label=`Learn more about ${product.title}` aria-haspopup='dialog' aria-controls='solution-overview')
+            img(src='/src/assets/solutions/caret-right.svg' alt='' aria-hidden='true')
+    if product.image
+      .solution-card__visual
+        img.solution-card__photo(src=product.image.src alt=product.image.alt width='772' height='1024' loading='lazy' decoding='async' data-solution-photo)
+        .solution-card__badge
+          img(src='/src/assets/solutions/gem.svg' alt='' aria-hidden='true')
+          p.solution-card__badge-copy
+            strong(data-solution-badge-value)= product.image.badge.value
+            = ' '
+            span(data-solution-badge-label)= product.image.badge.label
+            br
+            span(data-solution-badge-detail)= product.image.badge.detail

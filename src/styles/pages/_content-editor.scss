@@ -1,0 +1,20 @@
+.content-editor {
+  max-width: 1060px; margin-inline: auto;
+  &__note { margin-top: var(--space-5); font-size: var(--font-size-sm); color: var(--color-text-muted); }
+  &__status { margin-block: var(--space-5); font-size: var(--font-size-sm); color: var(--color-text-muted); }
+  &__error { color: #a52b16; margin-block: var(--space-4); font-size: var(--font-size-sm); &:empty { display: none; } }
+  fieldset { min-width: 0; }
+  &__fields { border: 0; padding: 0; }
+  &__group { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--space-5); min-width: 0; > .content-editor__group, > .content-editor__list { grid-column: 1/-1; } }
+  &__list { border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-5); legend { padding-inline: var(--space-2); font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); } }
+  &__entry { border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: var(--space-4); background: var(--color-background); margin-bottom: var(--space-5); .content-editor__list { background: var(--color-surface); } }
+  &__row-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-4); }
+  &__small { padding: 8px 12px; min-height: 40px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-text); font: inherit; font-size: var(--font-size-xs); &:disabled { opacity: .4; cursor: default; } }
+  &__actions { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-3); margin-bottom: var(--space-6); padding-block: var(--space-3); border-bottom: 1px solid var(--color-border); background: var(--color-surface); }
+  &__upload { border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-5); margin-bottom: var(--space-6); > h3 { margin: 0; } .content-editor__group { margin-block: var(--space-5); } input[type='file'] { max-width: 100%; min-width: 0; padding: 10px; } }
+  &__upload-preview { display: block; max-width: min(240px,100%); max-height: 90px; object-fit: contain; margin-top: var(--space-4); }
+  .admin-field__error { overflow-wrap: anywhere; }
+}
+@media(max-width:47.999rem){
+  .content-editor { &__group { grid-template-columns: minmax(0,1fr); } &__list { padding: var(--space-3); } &__entry { padding: var(--space-3); } &__actions > .button { width: 100%; } }
+}

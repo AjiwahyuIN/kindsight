@@ -1,0 +1,12 @@
+.portal-layout {
+  &__content { max-width: 1520px; padding: 0 var(--space-10) var(--space-10); margin-inline: auto; }
+  &__organization { max-width: 246px; margin-top: var(--space-2); font-size: var(--font-size-xs); color: var(--color-text-muted); overflow-wrap: anywhere; }
+  &__navigation-link { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 12px 16px; border-radius: var(--radius-pill); color: var(--color-text); font-size: var(--font-size-sm); text-decoration: none; white-space: nowrap; font-weight: var(--font-weight-medium);
+    &[aria-current='page'] { color: var(--color-surface); background: var(--color-text); }
+    &:hover:not([aria-current='page']) { background: var(--color-background); }
+  }
+  .dashboard-shell__navigation { gap: var(--space-1); }
+}
+@media(max-width:47.999rem) {
+  .portal-layout { &__content { padding: 0 var(--space-4) var(--space-8); } &__organization { max-width: 220px; } &__navigation-link { padding-inline: 14px; } }
+}

@@ -1,0 +1,12 @@
+import { getPublicContent } from './content';
+import { ServiceError, type SampleScenario, type ServiceOptions } from './types';
+import type { FooterContent, NewsletterScenario, NewsletterPreview } from './footer-types';
+
+export async function getFooter(_scenario: SampleScenario = 'success', { signal }: ServiceOptions = {}): Promise<FooterContent | null> {
+  signal?.throwIfAborted();
+  return await getPublicContent('footer', { signal });
+}
+export async function previewNewsletter({ email, scenario: _scenario = 'success' }: { email: string; scenario?: NewsletterScenario }): Promise<NewsletterPreview> {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) throw new ServiceError('Please enter a valid email.', 'INVALID_EMAIL', 400);
+  return { message: 'Thank you! This is a local preview; no subscription has been created.', subscribed: false };
+}

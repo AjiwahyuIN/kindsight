@@ -1,0 +1,64 @@
+extends ../templates/layouts/base.pug
+
+block title
+  title Fundraising Dashboard — Kindsight
+
+block content
+  .dashboard-shell(lang='en')
+    p.dashboard-shell__gate(role='status' data-shell-gate) Checking your session…
+    .dashboard-shell__workspace(hidden data-shell-workspace)
+      include ../templates/components/dashboard-header.pug
+      main#main-content.dashboard-shell__main(tabindex='-1')
+        include ../templates/components/dashboard-toolbar.pug
+        include ../templates/components/dashboard-overview.pug
+    .dashboard-shell__status(role='status' hidden data-shell-status)
+      span(data-shell-status-text)
+      button(type='button' hidden data-shell-retry) Try again
+      button(type='button' aria-label='Dismiss message' data-shell-dismiss) Close
+
+    dialog.dashboard-dialog(aria-labelledby='dashboard-preview-title' aria-describedby='dashboard-preview-description' data-shell-preview-dialog)
+      .dashboard-dialog__header
+        h2#dashboard-preview-title
+        +button('Close', {variant:'light',size:'sm'})(data-shell-dialog-close)
+      p#dashboard-preview-description
+      +button('Manage fundraising', {href:'/admin.html',variant:'outline',size:'sm'})
+
+    dialog.dashboard-dialog(aria-labelledby='dashboard-period-title' data-shell-period-dialog)
+      form(data-shell-period-form)
+        .dashboard-dialog__header
+          h2#dashboard-period-title Reporting period
+          +button('Close', {variant:'light',size:'sm'})(data-shell-dialog-close)
+        p Dates use UTC. The selected end date is included.
+        .dashboard-dialog__fields
+          label(for='dashboard-period-from') From
+          input#dashboard-period-from(type='date' name='from' required min='1000-01-01' max='9998-12-31')
+          label(for='dashboard-period-through') Through
+          input#dashboard-period-through(type='date' name='through' required min='1000-01-01' max='9998-12-31')
+        p.dashboard-dialog__error(role='alert' data-shell-period-error)
+        .dashboard-dialog__actions
+          +button('Cancel', {variant:'outline',size:'sm'})(data-shell-dialog-close)
+          +button('Apply period', {type:'submit',size:'sm'})(data-shell-period-save)
+
+    dialog.dashboard-dialog(aria-labelledby='dashboard-rename-title' data-shell-title-dialog)
+      form(data-shell-title-form)
+        .dashboard-dialog__header
+          h2#dashboard-rename-title Dashboard title
+          +button('Close', {variant:'light',size:'sm'})(data-shell-dialog-close)
+        p This title applies until you reload the page.
+        .dashboard-dialog__fields
+          label(for='dashboard-title-input') Title
+          input#dashboard-title-input(type='text' name='title' maxlength='60' required)
+        .dashboard-dialog__actions
+          +button('Cancel', {variant:'outline',size:'sm'})(data-shell-dialog-close)
+          +button('Apply title', {type:'submit',size:'sm'})
+
+    dialog.dashboard-dialog(aria-labelledby='dashboard-copy-title' data-shell-copy-dialog)
+      .dashboard-dialog__header
+        h2#dashboard-copy-title Dashboard link
+        +button('Close', {variant:'light',size:'sm'})(data-shell-dialog-close)
+      p Copy this link to open the same reporting period. An admin session is required.
+      label.dashboard-dialog__copy-label(for='dashboard-link-input') Link
+      input#dashboard-link-input(type='text' readonly)
+
+block scripts
+  script(type='module' src='/src/scripts/dashboard-shell.js')

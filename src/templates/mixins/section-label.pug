@@ -1,0 +1,15 @@
+mixin sectionLabel(text)
+  p.section-label
+    img(src='/src/assets/missions/24ef8.svg' alt='' aria-hidden='true')
+    span= text
+
+mixin endBackground(section, horizontal, vertical)
+  .landing-end-background(aria-hidden='true')
+    .landing-end-background__horizontal
+      img(src='/src/assets/' + section + '/' + horizontal alt='')
+    .landing-end-background__vertical
+      img(src='/src/assets/' + section + '/' + vertical alt='')
+    .landing-end-background__fade.landing-end-background__fade--top
+      img(src='/src/assets/missions/fed2b.svg' alt='')
+    .landing-end-background__fade.landing-end-background__fade--bottom
+      img(src='/src/assets/missions/fed2b.svg' alt='')

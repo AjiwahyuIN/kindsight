@@ -1,0 +1,37 @@
+export const adminEntities = {
+  donors: {
+    label:'Donors', singular:'donor', description:'Keep donor details organized and ready for meaningful connections.',
+    columns:['Name','Email','Organization','State'],
+    fields:[
+      {name:'name',label:'Full name',type:'text',required:true,max:160},
+      {name:'email',label:'Email address',type:'email',max:254},
+      {name:'phone',label:'Phone',type:'tel',max:40},
+      {name:'organization',label:'Organization',type:'text',max:160},
+    ],
+  },
+  campaigns: {
+    label:'Campaigns',singular:'campaign',description:'Bring each mission into focus with a clear goal and campaign timeline.',
+    columns:['Campaign','Target (USD)','Dates','Status'],statuses:['draft','active','completed'],
+    fields:[
+      {name:'name',label:'Campaign name',type:'text',required:true,max:160},
+      {name:'description',label:'Description',type:'textarea',max:5000},
+      {name:'target_amount',label:'Target amount (USD)',type:'text',required:true,money:true},
+      {name:'starts_on',label:'Start date',type:'date'},
+      {name:'ends_on',label:'End date',type:'date'},
+      {name:'status',label:'Status',type:'select',choices:['draft','active','completed'],required:true},
+    ],
+  },
+  donations: {
+    label:'Donations',singular:'donation',description:'Record giving in USD, including anonymous donors and general contributions.',
+    columns:['Donor','Campaign','Amount (USD)','Status','Received / expected'],statuses:['pending','received','cancelled'],
+    fields:[
+      {name:'donor_id',label:'Donor',type:'reference',source:'donors',empty:'Anonymous'},
+      {name:'campaign_id',label:'Campaign',type:'reference',source:'campaigns',empty:'General giving'},
+      {name:'amount',label:'Amount (USD)',type:'text',required:true,money:true},
+      {name:'status',label:'Status',type:'select',choices:['pending','received','cancelled'],required:true},
+      {name:'received_at',label:'Received date and time',type:'datetime-local',hint:'Shown in your local time; saved in UTC.'},
+      {name:'expected_at',label:'Expected date and time',type:'datetime-local',hint:'Optional for pending donations.'},
+      {name:'note',label:'Note',type:'textarea',max:2000},
+    ],
+  },
+};

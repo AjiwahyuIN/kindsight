@@ -1,0 +1,20 @@
+//- A single-open disclosure group with the first panel rendered open.
+mixin accordion(items, options = {})
+  - const { id = 'accordion', label = 'Details' } = options
+  .accordion(data-accordion aria-label=label)
+    each item, index in items
+      .accordion__item(data-accordion-item=item.id data-open=index === 0 ? 'true' : 'false')
+        h3.accordion__heading
+          button.accordion__trigger(type='button' id=`${id}-${item.id}-trigger` aria-expanded=index === 0 ? 'true' : 'false' aria-controls=`${id}-${item.id}-panel` data-accordion-trigger)
+            span.accordion__title-group
+              if item.icon
+                span.accordion__icon(aria-hidden='true')
+                  span.accordion__icon-inner
+                    span.accordion__icon-slot
+                      img(src=item.icon alt='')
+              span.accordion__title(data-accordion-title)= item.title
+            span.accordion__indicator(aria-hidden='true')
+              img.accordion__plus(src='/src/assets/difference/plus.svg' alt='')
+              img.accordion__minus(src='/src/assets/difference/minus.svg' alt='')
+        .accordion__panel(id=`${id}-${item.id}-panel` role='region' aria-labelledby=`${id}-${item.id}-trigger` data-accordion-panel hidden=index !== 0)
+          p(data-accordion-description)= item.description

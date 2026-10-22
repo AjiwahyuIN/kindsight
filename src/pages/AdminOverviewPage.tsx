@@ -1,0 +1,12 @@
+import {useAdminOverview} from '../queries/admin-overview';
+import {Button,LinkButton} from '../components/ui/Button';
+import {StatusMessage} from '../components/ui/StatusMessage';
+export function AdminOverviewPage(){
+ const overview=useAdminOverview(),data=overview.data;
+ return <><title>Internal Admin Overview — Kindsight</title><section className="admin-workspace__intro"><p className="admin-workspace__eyebrow">Internal administration</p><h1 className="admin-workspace__title">Platform overview</h1><p className="admin-workspace__subtitle">Manage your website content and review platform operations.</p></section>
+  <section aria-label="Platform operations" aria-busy={overview.isFetching}>
+   {overview.isPending&&<StatusMessage kind="loading">Loading platform overview…</StatusMessage>}
+   {overview.isError&&<StatusMessage kind="error" action={<Button size="sm" onClick={()=>void overview.refetch()}>Try again</Button>}>{overview.error.message}</StatusMessage>}
+   {data&&<><dl className="admin-overview__stats"><div className="admin-overview__card"><dt>Organizations</dt><dd>{data.organizations.total.toLocaleString('en-US')}<span className="admin-overview__detail">{data.organizations.active.toLocaleString('en-US')} active</span></dd></div><div className="admin-overview__card"><dt>Organization accounts</dt><dd>{data.organizationAccounts.total.toLocaleString('en-US')}<span className="admin-overview__detail">{data.organizationAccounts.enabled.toLocaleString('en-US')} enabled with an active organization</span></dd></div><div className="admin-overview__card"><dt>Published landing sections</dt><dd>{data.landingSections.toLocaleString('en-US')}<span className="admin-overview__detail">Stored content for the 10 supported design sections</span></dd></div></dl>{data.organizations.total===0&&<StatusMessage kind="empty">No organizations have been created yet.</StatusMessage>}<p className="admin-overview__timestamp" role="status">{overview.isFetching?'Refreshing overview…':`Updated ${new Date(data.updatedAt).toLocaleString('en-US')}`}</p></>}
+  </section><section className="admin-overview__card admin-overview__content"><h2>Landing content</h2><p>Edit and publish the website’s approved sections, including the navbar, hero, partners and footer.</p><LinkButton to="/admin/content/navbar" size="sm">Open content editor</LinkButton></section><p className="admin-overview__note">Fundraising records and financial reports are available only in each organization’s workspace.</p></>;
+}

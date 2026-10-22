@@ -1,0 +1,42 @@
+extends ../templates/layouts/base.pug
+
+block title
+  title Fondasi UI — Kindsight
+
+block content
+  main#main-content.container.foundation(tabindex='-1')
+    header.foundation__header
+      p.foundation__eyebrow Kindsight / QC fondasi
+      h1.foundation__title Font, warna, dan komponen dasar.
+      p.foundation__description Sampel fondasi UI untuk diperiksa sebelum pengerjaan section halaman.
+
+    section.foundation__group(aria-labelledby='type-title')
+      h2#type-title.foundation__heading Typography
+      p.foundation__type.foundation__type--regular Inter Tight Regular · 400
+      p.foundation__type.foundation__type--medium Inter Tight Medium · 500
+      p.foundation__type.foundation__type--semibold Inter Tight SemiBold · 600
+      p.foundation__caption Angka dan tanda baca: $18,425.98 · 54% · 3,000+ · Aa Bb Cc
+
+    section.foundation__group(aria-labelledby='color-title')
+      h2#color-title.foundation__heading Warna
+      ul.foundation__swatches
+        each item in [{ name: 'Brand', hex: '#F66515', key: 'brand' }, { name: 'Accent', hex: '#E8580A', key: 'accent' }, { name: 'Text', hex: '#2A2A2A', key: 'text' }, { name: 'Secondary', hex: '#999999', key: 'text-secondary' }, { name: 'Surface', hex: '#FCFCFC', key: 'surface' }, { name: 'Background', hex: '#F4F4F4', key: 'background' }]
+          li.foundation__swatch
+            span.foundation__color(style=`--swatch-color: var(--color-${item.key})` aria-hidden='true')
+            strong.foundation__swatch-name= item.name
+            span.foundation__caption= item.hex
+
+    section.foundation__group(aria-labelledby='button-title')
+      h2#button-title.foundation__heading Button
+      .foundation__buttons
+        +button('Primary')
+        +button('Dark', { variant: 'dark' })
+        +button('Light', { variant: 'light' })
+        +button('Outline', { variant: 'outline' })
+        +button('Small', { size: 'sm' })
+        +button('Disabled')(disabled)
+        +button('Tautan typography', { href: '#type-title', variant: 'outline' })
+      p.foundation__caption Periksa hover, tekan, dan fokus keyboard dengan Tab. Button sampel tidak menjalankan aksi bisnis.
+
+block scripts
+  script(type='module' src='/src/scripts/foundation.js')

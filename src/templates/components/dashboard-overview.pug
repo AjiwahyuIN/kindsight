@@ -1,0 +1,144 @@
+section.dashboard-overview(aria-label='Fundraising overview')
+  .dashboard-overview__primary
+    article.dashboard-raised(aria-labelledby='raised-title' aria-busy='true' data-report-region)
+      header.dashboard-card__header
+        .dashboard-card__heading
+          span.dashboard-card__emblem
+            +dashboardIcon('/src/assets/icons/hero/chart-up.svg','card')
+          h2#raised-title.dashboard-card__label Total raised
+        .dashboard-card__controls
+          label.dashboard-card__select
+            span.sr-only Trend interval
+            select(aria-label='Trend interval' data-trend-interval)
+              option(value='day') Daily
+              option(value='month') Monthly
+            +dashboardIcon('/src/assets/dashboard/caret.svg','caret')
+          a.dashboard-card__round(href='/admin.html?view=donations' aria-label='Manage donations')
+            +dashboardIcon('/src/assets/dashboard/arrow.svg')
+      .dashboard-raised__summary
+        .dashboard-raised__amount-row
+          p.dashboard-raised__amount(aria-label='Total raised in USD' data-raised) —
+          span.dashboard-raised__growth(hidden data-growth)
+        p.dashboard-raised__hint(data-raised-count) Loading received donations…
+      .dashboard-raised__chart
+        canvas(data-raised-chart role='img' aria-label='Received donations by date in USD')
+      p.dashboard-card__note(role='status' data-trend-status) Loading trend…
+      details.dashboard-raised__details
+        summary View chart data
+        .dashboard-card__table-scroll(tabindex='0' role='region' aria-label='Trend data table')
+          table
+            caption.sr-only Received donations by date, USD, UTC
+            thead
+              tr
+                th(scope='col') Date (UTC)
+                th(scope='col') Received (USD)
+                th(scope='col') Donations
+            tbody(data-trend-rows)
+    article.dashboard-campaign(aria-labelledby='campaign-title' aria-busy='true' data-campaign-region)
+      img.dashboard-campaign__art(src='/src/assets/dashboard/campaign.png' alt='')
+      .dashboard-campaign__shade
+      .dashboard-campaign__content
+        header.dashboard-campaign__header
+          h2#campaign-title(data-campaign-name) Campaign
+          label
+            span.sr-only Select campaign
+            select(aria-label='Select campaign' data-campaign-select disabled)
+              option Loading…
+        .dashboard-campaign__stats
+          p.dashboard-campaign__raised(data-campaign-raised) —
+          p.dashboard-campaign__target(data-campaign-target) Loading target…
+        .dashboard-campaign__gauge
+          canvas(data-campaign-chart role='img' aria-label='Lifetime campaign progress')
+          .dashboard-campaign__gauge-label
+            strong(data-campaign-percent) —
+            span Target reached
+        p.dashboard-card__note(data-campaign-status role='status') Loading campaign…
+      a.dashboard-campaign__action(href='/admin.html?view=donations')
+        span Go Donation
+        +dashboardIcon('/src/assets/dashboard/arrow.svg')
+      .dashboard-campaign__team(aria-hidden='true')
+        each n in [1,2,3]
+          span.dashboard-campaign__avatar
+            img(src='/src/assets/dashboard/campaign-team-' + n + '.png' alt='')
+        span.dashboard-campaign__lifetime Lifetime
+  .dashboard-overview__secondary
+    .dashboard-overview__insights
+      article.dashboard-card.dashboard-major(aria-labelledby='major-title')
+        header.dashboard-card__header
+          .dashboard-card__heading
+            span.dashboard-card__emblem
+              +dashboardIcon('/src/assets/icons/hero/major-gift.svg','card')
+            h2#major-title.dashboard-card__label Major gift
+          button.dashboard-card__round(type='button' aria-label='About major gifts' data-dashboard-explain='majorGifts')
+            +dashboardIcon('/src/assets/dashboard/arrow.svg')
+        ul.dashboard-major__legend(aria-label='Prospect stages')
+          each label in ['Identified','Qualified','Active ask']
+            li= label
+        .dashboard-major__gauge
+          canvas(data-major-chart role='img' aria-label='Major gift count unavailable')
+          .dashboard-major__total
+            strong —
+            span Total
+        p.dashboard-card__note.dashboard-major__reason Major gift criteria not defined.
+        .dashboard-major__metrics
+          each item in [{label:'Forecasted', key:'forecast'}, {label:'Pending ask', key:'pendingAmount'}]
+            .dashboard-major__metric
+              span= item.label
+              button(type='button' aria-label='About ' + item.label data-dashboard-explain=item.key)
+                +dashboardIcon('/src/assets/dashboard/info.svg')
+              strong —
+      article.dashboard-card.dashboard-ai(aria-labelledby='insight-title')
+        .dashboard-ai__inner
+          header.dashboard-card__header
+            .dashboard-card__heading
+              span.dashboard-card__emblem.dashboard-card__emblem--orange
+                +dashboardIcon('/src/assets/icons/hero/ai-bulb.svg','card')
+              h2#insight-title.dashboard-card__label AI insight
+            button.dashboard-ai__generate(type='button' data-dashboard-explain='aiInsights')
+              +dashboardIcon('/src/assets/dashboard/spark.svg')
+              span Generate
+          .dashboard-ai__result
+            strong —
+            .dashboard-ai__avatars(aria-hidden='true')
+              each n in [1,2,3]
+                span(class='dashboard-ai__avatar dashboard-ai__avatar--' + n)
+                  img(src='/src/assets/dashboard/ai-team-' + n + '.png' alt='')
+          .dashboard-ai__copy
+            p.dashboard-ai__badge Not connected
+            p Donor insights will appear here when a scoring model and insight source are available.
+          p.dashboard-ai__updated No insights generated
+    article.dashboard-card.dashboard-prospects(aria-labelledby='prospects-title')
+      header.dashboard-card__header
+        .dashboard-card__heading
+          span.dashboard-card__emblem
+            +dashboardIcon('/src/assets/icons/hero/prospects.svg','card')
+          h2#prospects-title.dashboard-card__label Top prospects
+        form.dashboard-prospects__search(data-donor-search)
+          label
+            span.sr-only Search donors
+            +dashboardIcon('/src/assets/dashboard/search.svg')
+            input(type='search' name='search' placeholder='Search donors' aria-label='Search donors' maxlength='160')
+          button.dashboard-card__round(type='submit' aria-label='Search donors')
+            +dashboardIcon('/src/assets/dashboard/search.svg')
+        a.dashboard-card__round(href='/admin.html?view=donors' aria-label='Manage donors')
+          +dashboardIcon('/src/assets/dashboard/arrow.svg')
+      p.dashboard-card__note Donor directory · prospect scoring, capacity and engagement not connected.
+      .dashboard-card__table-scroll(tabindex='0' role='region' aria-label='Donor directory table')
+        table.dashboard-prospects__table
+          caption.sr-only Active donor profiles, not ranked prospects. Gift and engagement data unavailable.
+          thead
+            tr
+              each label in ['Name','Capacity','Last gift','Engagement','Profile']
+                th(scope='col')= label
+          tbody(data-donor-rows)
+      .dashboard-prospects__footer
+        p.dashboard-card__note(role='status' data-donor-status) Loading donors…
+        .dashboard-prospects__pagination
+          button(type='button' data-donor-previous disabled) Previous
+          button(type='button' data-donor-next disabled) Next
+
+dialog.dashboard-dialog(aria-labelledby='dashboard-metric-title' aria-describedby='dashboard-metric-description' data-metric-dialog)
+  .dashboard-dialog__header
+    h2#dashboard-metric-title Metric information
+    +button('Close',{variant:'light',size:'sm'})(data-shell-dialog-close)
+  p#dashboard-metric-description

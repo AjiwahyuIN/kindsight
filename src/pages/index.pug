@@ -1,0 +1,21 @@
+extends ../templates/layouts/base.pug
+
+block header
+  include ../templates/components/navbar.pug
+
+block content
+  main#main-content(tabindex='-1')
+    include ../templates/components/hero.pug
+    include ../templates/components/partners.pug
+    include ../templates/components/difference.pug
+    include ../templates/components/about.pug
+    include ../templates/components/solutions.pug
+    include ../templates/components/testimonial.pug
+    include ../templates/components/missions.pug
+    include ../templates/components/sectors.pug
+  include ../templates/components/footer.pug
+
+block scripts
+  script(type='module' src='/src/scripts/landing.js')
+
+//- Remaining sections await combined QC before further work.
