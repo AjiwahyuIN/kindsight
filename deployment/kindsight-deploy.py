@@ -240,7 +240,9 @@ def main():
                 os.chown(file, account.pw_uid, account.pw_gid)
                 os.chmod(file, 0o644)
         with (STATE / 'npm-install.log').open('w') as log:
-            subprocess.run([str(NODE_BIN / 'npm'), 'ci', '--include=dev', '--no-audit', '--no-fund'], cwd=release,
+            # aaPanel configures a shared root-owned npm cache. CLI --cache takes
+            # precedence without changing that cache or the global npm config.
+            subprocess.run([str(NODE_BIN / 'npm'), 'ci', '--cache', str(release / '.npm-cache'), '--include=dev', '--no-audit', '--no-fund'], cwd=release,
                            env=runtime_env(), preexec_fn=identity(), stdout=log, stderr=log, check=True, timeout=240)
         for unit in UNITS:
             if not (release / unit).exists() or (release / unit).is_symlink() or (APP / unit).is_symlink():

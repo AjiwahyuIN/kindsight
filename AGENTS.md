@@ -286,3 +286,8 @@
 - User mengizinkan automatic deploy dengan batas khusus Kindsight. Nama aktual hasil pemeriksaan server adalah kindsight_api. Jangan memakai restart_project aaPanel karena fungsi itu mengubah izin direktori Node bersama; jangan PM2/global restart atau perubahan aplikasi lain.
 - deployment/kindsight-deploy.py dan installer menyiapkan root helper tanpa argumen/sudo terbatas, fixed path dan startup hash, scope PID uid/cwd/tag, verified ZIP/manifest, staging npm as-www, preflight, backup/restore unit code; env/storage/database dipertahankan. Folder app bukan symlink agar aaPanel cwd tetap cocok. Detail deployment/automatic-deploy.md.
 - Job deploy workflow hanya main, environment production dan repository variable VPS_DEPLOY_ENABLED=true. Belum root install/sudo/secrets/enable/live test pada tahap persiapan ini. Jangan mengklaim sudah auto-deploy atau rollback live teruji. Server interruption saat aktivasi membutuhkan recovery journal manual; restart singkat, bukan zero downtime.
+
+# Status uji automatic deploy — cache staging
+
+- Helper/sudo khusus Kindsight terpasang, GitHub production/main dan secrets tersedia. Push main memicu CI; audit bersih setelah patch body-parser2.4.0/multer2.5.0. Deploy berhenti sebelum aktivasi pada EACCES cache npm global aaPanel. Live lama tetap sehat; VPS_DEPLOY_ENABLED=false.
+- Perbaikan helper memberi npm ci --cache <release>/.npm-cache; jangan mengikuti saran chown global /www/server/nodejs/cache. Lima tes deployment lolos. Root perlu memasang helper baru dengan checksum, lalu uji ulang. Jangan klaim deploy/rollback live teruji sebelum sukses. Detail deployment/automatic-deploy.md.

@@ -2,7 +2,7 @@
 
 ## Batas dan status
 
-Kode otomasi sudah disiapkan. Belum dipasang sebagai root, belum diberi sudo, belum menyimpan private key di GitHub, dan belum diaktifkan. Tidak ada deployment live/restart saat persiapan ini. GitHub repository variable `VPS_DEPLOY_ENABLED=true` adalah sakelar aktivasi; default tidak ada berarti job deploy dilewati. Jangan mengaktifkan sebelum instalasi, fingerprint, secrets dan uji selesai.
+Helper root/sudo terbatas sudah dipasang. Environment production dibatasi main, tiga secret SSH disimpan, fingerprint ED25519 dicocokkan lewat Terminal aaPanel. Uji push main memicu workflow, tetapi deploy pertama berhenti pada npm ci di staging sebelum aktivasi: cache global aaPanel /www/server/nodejs/cache dimiliki root. Website lama tetap berjalan. VPS_DEPLOY_ENABLED saat ini false sampai perbaikan helper cache dipasang dan uji ulang selesai. Jangan mengklaim auto-deploy live atau rollback live sudah lolos.
 
 Pemeriksaan VPS menemukan nama aktual **kindsight_api**, bukan kingsight_api. API berjalan via startup script aaPanel, bukan PM2. Fungsi restart_project bawaan juga melakukan chmod/chown pada direktori Node bersama, jadi tidak dipakai. Helper hanya menjalankan `/www/server/nodejs/vhost/scripts/kindsight_api.sh` sebagai www, setelah mencocokkan checksum script dengan saat instalasi. Perubahan script panel memerlukan tinjauan ulang.
 
@@ -25,7 +25,7 @@ Review `install-kindsight-deploy.sh` dan `kindsight-deploy.py`. Unduh dari commi
 
 Sesudah installer: cek `sudo -n -l` sebagai kindsight_deploy. Root helper tidak dipanggil sampai paket pertama sengaja dikirim. Jangan menjalankan helper root tanpa paket yang valid untuk mencoba restart.
 
-## GitHub configuration (belum dibuat saat persiapan)
+## GitHub configuration (sudah dibuat)
 
 Environment production, secrets:
 - VPS_HOST:157.245.194.228
@@ -37,3 +37,9 @@ Repository variable VPS_DEPLOY_ENABLED mengaktifkan job. Mulai dengan workflow_d
 ## Verifikasi sebelum root install
 
 Lima tes deployment (termasuk pemulihan unit saat aktivasi parsial gagal, env/upload dan aplikasi tetangga tetap utuh) menolak path traversal/symlink/credential, file undeclared/hash salah, dan scope PID dari user/folder/project lain. Syntax Bash/Python/YAML diperiksa. Tes ini bukan bukti live activation/rollback; uji VPS menunggu installer root dan secrets.
+
+## Perbaikan cache staging — 26 Oktober 2026
+
+- npm ci sekarang menerima --cache <release>/.npm-cache secara eksplisit. Cache dibuat oleh proses www di release Kindsight; opsi CLI mengalahkan cache global aaPanel tanpa mengubah npmrc atau izin /www/server/nodejs/cache. Tidak melakukan chown global atau upgrade npm.
+- Lima tes deployment dan diff check lulus. Body-parser 2.4.0 dan multer 2.5.0 sudah dipush setelah audit memblokir percobaan pertama; audit bersih, build/unit API/upload/CMS MySQL lokal lulus.
+- Helper terpasang masih versi lama sampai root mengganti satu file /usr/local/sbin/kindsight-deploy dengan hash terverifikasi. Installer awal tidak dijalankan ulang; konfigurasi, sudoers, startup script, env dan aplikasi lain tidak diubah. Setelah pembaruan, aktifkan kembali variable dan uji workflow.
