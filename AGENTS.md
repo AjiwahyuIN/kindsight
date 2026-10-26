@@ -280,3 +280,9 @@
 - Save and publish menampilkan toast persisten nama section hanya setelah API sukses; spinner pending dan check pada tombol. Dismiss/edit/reset/reload/pergantian section membersihkan toast; edit/percobaan baru membersihkan success lama. Jangan tampilkan sukses optimistis atau menghapus draft/error409.
 - Live region polite, reduced motion, token/BEM dan fokus kembali ke publish saat dismiss tanpa scroll paksa. Berlaku untuk seluruh section melalui EditorForm yang sama. Browser desktop/mobile dan save lokal tanpa mengubah copy diperiksa; detail docs/cms-publish-feedback.md. Tidak mengubah CMS/data/VPS live.
 - GitHub masih build/artifact saja, bukan auto deploy VPS. Jangan menyebut perubahan tampil live sebelum deployment nyata diverifikasi.
+
+# Otomasi deploy VPS — persiapan belum aktif
+
+- User mengizinkan automatic deploy dengan batas khusus Kindsight. Nama aktual hasil pemeriksaan server adalah kindsight_api. Jangan memakai restart_project aaPanel karena fungsi itu mengubah izin direktori Node bersama; jangan PM2/global restart atau perubahan aplikasi lain.
+- deployment/kindsight-deploy.py dan installer menyiapkan root helper tanpa argumen/sudo terbatas, fixed path dan startup hash, scope PID uid/cwd/tag, verified ZIP/manifest, staging npm as-www, preflight, backup/restore unit code; env/storage/database dipertahankan. Folder app bukan symlink agar aaPanel cwd tetap cocok. Detail deployment/automatic-deploy.md.
+- Job deploy workflow hanya main, environment production dan repository variable VPS_DEPLOY_ENABLED=true. Belum root install/sudo/secrets/enable/live test pada tahap persiapan ini. Jangan mengklaim sudah auto-deploy atau rollback live teruji. Server interruption saat aktivasi membutuhkan recovery journal manual; restart singkat, bukan zero downtime.

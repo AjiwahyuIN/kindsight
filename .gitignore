@@ -12,3 +12,7 @@ dist-legacy/
 
 # Local deployment archives; never publish code/data packages through Git.
 deploy-artifacts/
+
+# Python deployment helper verification
+__pycache__/
+*.pyc

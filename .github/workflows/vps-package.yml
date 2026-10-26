@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: vps-package-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   package:
@@ -34,14 +34,16 @@ jobs:
         run: npm run test:frontend
       - name: API unit tests (no database)
         run: npm run test:api
+      - name: Deployment safety tests
+        run: python3 -m unittest discover -s deployment/tests -p 'test_*.py'
       - name: Build and package current source
         run: npm run package:vps
       - name: Verify ZIP checksums
         working-directory: deploy-artifacts
         run: sha256sum --check *.sha256
-      - name: Dependency audit (informational; deployment is not enabled)
-        continue-on-error: true
-        run: npm audit --omit=dev
+      - name: Runtime dependency audit (blocking when deploy is enabled)
+        continue-on-error: ${{ vars.VPS_DEPLOY_ENABLED != 'true' }}
+        run: npm audit --omit=dev --audit-level=high
       - name: Store package
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
@@ -52,4 +54,55 @@ jobs:
           if-no-files-found: error
           retention-days: 14
       - name: Deployment status
-        run: echo 'Build package only. No VPS connection, database migration or public deployment has run.' >> "$GITHUB_STEP_SUMMARY"
+        run: echo 'Package created. VPS deployment is a separate gated job; no database migrations run automatically.' >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    needs: package
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.VPS_DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production
+    concurrency:
+      group: kindsight-production
+      cancel-in-progress: false
+    steps:
+      - name: Download tested package
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6
+        with:
+          name: kindsight-vps-${{ github.sha }}
+          path: deploy-artifacts
+      - name: Install scoped SSH identity
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+        run: |
+          umask 077
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/kindsight_deploy
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          test -s ~/.ssh/kindsight_deploy
+          test -s ~/.ssh/known_hosts
+      - name: Transfer verified package and deploy only Kindsight
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$VPS_HOST" =~ ^[a-zA-Z0-9.-]+$ ]]
+          cd deploy-artifacts
+          sha256sum --check *.sha256
+          packages=(*.zip)
+          [[ ${#packages[@]} = 1 ]]
+          archive="${packages[0]}"
+          sha256sum "$archive" | cut -d ' ' -f 1 > package.sha256
+          ssh_options=(-i ~/.ssh/kindsight_deploy -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=15)
+          scp "${ssh_options[@]}" "$archive" "kindsight_deploy@$VPS_HOST:incoming/package.zip"
+          scp "${ssh_options[@]}" package.sha256 "kindsight_deploy@$VPS_HOST:incoming/package.sha256"
+          ssh "${ssh_options[@]}" "kindsight_deploy@$VPS_HOST" 'sudo -n /usr/local/sbin/kindsight-deploy'
+      - name: Verify public readiness
+        run: |
+          curl --fail --silent --show-error --retry 3 --max-time 15 https://kindsight.owwteam.dev/api/v1/ready
+          curl --fail --silent --show-error --output /dev/null --max-time 15 https://kindsight.owwteam.dev/
+      - name: Remove SSH identity
+        if: always()
+        run: rm -f ~/.ssh/kindsight_deploy ~/.ssh/known_hosts
