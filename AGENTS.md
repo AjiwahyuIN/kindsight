@@ -274,3 +274,9 @@
 
 - Atas instruksi pengguna, .github/workflows/vps-package.yml menyiapkan test/build/ZIP+SHA di Ubuntu Node22.22.2 untuk push main,PR/manual. Action dipin commit dan permission contents:read; tidak memakai rahasia/deploy/migrasi VPS. Audit high informasional selama persiapan, wajib diselesaikan sebelum publik.
 - Rekomendasi domain kindsight.owwteam.dev; belum mengubah DNS atau base aplikasi. Instruksi deployment/github-vps.md membedakan build CI dari deploy SSH yang belum terhubung. Jangan mengklaim otomatis update VPS sebelum deployment teruji atau git pull pada direktori ZIP nongit. Env/upload/database wajib persisten terpisah saat update.
+
+# Feedback publish CMS
+
+- Save and publish menampilkan toast persisten nama section hanya setelah API sukses; spinner pending dan check pada tombol. Dismiss/edit/reset/reload/pergantian section membersihkan toast; edit/percobaan baru membersihkan success lama. Jangan tampilkan sukses optimistis atau menghapus draft/error409.
+- Live region polite, reduced motion, token/BEM dan fokus kembali ke publish saat dismiss tanpa scroll paksa. Berlaku untuk seluruh section melalui EditorForm yang sama. Browser desktop/mobile dan save lokal tanpa mengubah copy diperiksa; detail docs/cms-publish-feedback.md. Tidak mengubah CMS/data/VPS live.
+- GitHub masih build/artifact saja, bukan auto deploy VPS. Jangan menyebut perubahan tampil live sebelum deployment nyata diverifikasi.
