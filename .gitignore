@@ -9,3 +9,6 @@ dist/
 server/storage/partner-logos/
 
 dist-legacy/
+
+# Local deployment archives; never publish code/data packages through Git.
+deploy-artifacts/

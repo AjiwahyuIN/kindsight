@@ -28,7 +28,7 @@
   padding: var(--space-4) var(--space-3) var(--space-6);
   &__summary { margin: var(--space-8) var(--space-3) var(--space-4); }
   &__amount-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
-  &__amount { font-size: clamp(36px,4vw,56px); font-weight: var(--font-weight-semibold); line-height: 1; letter-spacing: -.025em; overflow-wrap: anywhere; span { font-size: .57em; color: var(--color-text-secondary); letter-spacing: 0; } }
+  &__amount { font-size: clamp(36px,4vw,56px); font-weight: var(--font-weight-semibold); line-height: 1; letter-spacing: -.025em; overflow-wrap: anywhere; .dashboard-raised__fraction { font-size: .57em; color: var(--color-text-secondary); letter-spacing: 0; } }
   &__growth { border-radius: var(--radius-pill); padding: 5px 8px; background: rgb(1 181 19 / 10%); color: var(--color-success); font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); &[data-direction='down'] { color: #a52e16; background: rgb(246 101 21 / 10%); } }
   &__hint { margin-top: var(--space-3); color: var(--color-text-muted); font-size: var(--font-size-xs); }
   &__chart { position: relative; height: 238px; margin: var(--space-5) var(--space-2) 0; }
@@ -140,4 +140,18 @@
   .dashboard-card { break-inside: avoid; }
   .dashboard-raised__details, .dashboard-prospects__search, .dashboard-prospects__pagination, .dashboard-ai__generate, .dashboard-card__round, .dashboard-campaign__action, .dashboard-campaign__header label { display: none; }
   .dashboard-card__table-scroll { overflow: visible; }
+}
+
+.dashboard-raised {
+  &__request-status { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; min-height: 22px; margin-inline: var(--space-3); color: var(--color-text-muted); font-size: var(--font-size-xs); line-height: 1.5; }
+  &__updating { display: inline-flex; align-items: center; gap: 6px; > span { width: 10px; height: 10px; border: 1.5px solid var(--color-border); border-top-color: var(--color-brand); border-radius: 50%; animation: raised-report-loading .8s linear infinite; } }
+}
+@keyframes raised-report-loading { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .dashboard-raised__updating > span { animation: none; } }
+
+.dashboard-raised {
+  &__amount-visual { display: inline-flex; align-items: baseline; font-variant-numeric: tabular-nums; }
+  &__fraction { display: inline-flex; align-items: baseline; }
+  &__digit { display: inline-block; position: relative; width: .59em; height: 1em; overflow: hidden; vertical-align: baseline; }
+  &__digit-track { display: flex; flex-direction: column; line-height: 1; > span { flex: 0 0 1em; height: 1em; text-align: center; } }
 }

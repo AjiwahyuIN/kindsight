@@ -1,0 +1,55 @@
+name: VPS package
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vps-package-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '22.22.2'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --include=dev
+      - name: Frontend tests
+        run: npm run test:frontend
+      - name: API unit tests (no database)
+        run: npm run test:api
+      - name: Build and package current source
+        run: npm run package:vps
+      - name: Verify ZIP checksums
+        working-directory: deploy-artifacts
+        run: sha256sum --check *.sha256
+      - name: Dependency audit (informational; deployment is not enabled)
+        continue-on-error: true
+        run: npm audit --omit=dev
+      - name: Store package
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: kindsight-vps-${{ github.sha }}
+          path: |
+            deploy-artifacts/*.zip
+            deploy-artifacts/*.sha256
+          if-no-files-found: error
+          retention-days: 14
+      - name: Deployment status
+        run: echo 'Build package only. No VPS connection, database migration or public deployment has run.' >> "$GITHUB_STEP_SUMMARY"

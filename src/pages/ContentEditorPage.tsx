@@ -1,3 +1,4 @@
+import { useSlidingNav } from '../hooks/useSlidingNav';
 import type { AdminContext } from '../components/admin/AdminLayout';
 import { useEffect,useMemo,useRef,useState,type FormEvent } from 'react';
 import { Link,NavLink,useOutletContext,useParams } from 'react-router';
@@ -12,10 +13,15 @@ import { UnsavedChanges } from '../hooks/useUnsavedChanges';
 import { NotFoundPage } from './NotFoundPage';
 import '../styles/pages/_content-editor.scss';
 export const sectionLabels:Record<ContentSection,string>={navbar:'Navbar',hero:'Hero',partners:'Logo Partners',difference:'Difference',about:'About',solutions:'Solutions',testimonials:'Testimonials',missions:'Missions',sectors:'Sectors',footer:'Footer'};
-export function ContentEditorRoute(){const{section}=useParams();return contentSections.includes(section as ContentSection)?<EditorLoader key={section} section={section as ContentSection}/>:<NotFoundPage/>;}
+export function ContentEditorRoute(){const{section}=useParams();return contentSections.includes(section as ContentSection)?<><ContentSectionNavigation section={section as ContentSection}/><EditorLoader key={section} section={section as ContentSection}/></>:<NotFoundPage/>;}
+function ContentSectionNavigation({section}:{section:ContentSection}){
+  const navigation=useRef<HTMLElement>(null);
+  useSlidingNav(navigation,section);
+  return <><div className="admin-workspace__intro"><p className="admin-workspace__eyebrow">Kindsight / Landing content</p><h1 className="admin-workspace__title">Landing editor</h1><p className="admin-workspace__subtitle">Edit content while keeping the approved page layout. Changes are saved to the local database.</p></div><nav ref={navigation} className="admin-workspace__tabs" aria-label="Landing sections"><span className="admin-workspace__tab-indicator" aria-hidden="true" />{contentSections.map(key=><NavLink className="admin-workspace__tab" key={key} to={`/admin/content/${key}`}>{sectionLabels[key]}</NavLink>)}</nav></>;
+}
 function EditorLoader({section}:{section:ContentSection}){
   const query=useEditableContent(section);
-  return <><title>{`${sectionLabels[section]} editor — Kindsight`}</title><div className="admin-workspace__intro"><p className="admin-workspace__eyebrow">Kindsight / Landing content</p><h1 className="admin-workspace__title">Landing editor</h1><p className="admin-workspace__subtitle">Edit content while keeping the approved page layout. Changes are saved to the local database.</p></div><nav className="admin-workspace__tabs" aria-label="Landing sections">{contentSections.map(key=><NavLink className="admin-workspace__tab" key={key} to={`/admin/content/${key}`}>{sectionLabels[key]}</NavLink>)}</nav>{query.isPending&&<StatusMessage kind="loading">Loading saved content…</StatusMessage>}{query.isError&&<StatusMessage kind="error" action={<Button variant="outline" size="sm" onClick={()=>void query.refetch()}>Retry content</Button>}>{query.error.message}</StatusMessage>}{query.data&&<EditorForm section={section} initial={query.data} incomingRevision={query.data.revision} reload={async()=>{const response=await query.refetch();if(response.error)throw response.error;if(!response.data)throw new Error('Content unavailable.');return response.data;}}/>}</>;
+  return <><title>{`${sectionLabels[section]} editor — Kindsight`}</title>{query.isPending&&<StatusMessage kind="loading">Loading saved content…</StatusMessage>}{query.isError&&<StatusMessage kind="error" action={<Button variant="outline" size="sm" onClick={()=>void query.refetch()}>Retry content</Button>}>{query.error.message}</StatusMessage>}{query.data&&<EditorForm section={section} initial={query.data} incomingRevision={query.data.revision} reload={async()=>{const response=await query.refetch();if(response.error)throw response.error;if(!response.data)throw new Error('Content unavailable.');return response.data;}}/>}</>;
 }
 function EditorForm({section,initial,incomingRevision,reload}:{section:ContentSection;initial:ContentDocument;incomingRevision:number|string;reload:()=>Promise<ContentDocument>}){
   const[saved,setSaved]=useState(()=>structuredClone(initial)),[draft,setDraft]=useState(()=>structuredClone(initial.content)),[errors,setErrors]=useState<Record<string,string>>({}),[message,setMessage]=useState('Saved content loaded.'),[failure,setFailure]=useState(''),[reloading,setReloading]=useState(false);

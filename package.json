@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --config vite.config.ts",
     "build": "tsc --noEmit && tsc -p tsconfig.server.json && vite build --config vite.config.ts",
+    "package:vps": "node scripts/package-vps.mjs",
     "preview": "vite preview --config vite.config.ts",
     "dev:api": "tsx watch server/index.ts",
     "start:api": "tsx server/index.ts",

@@ -239,3 +239,38 @@
 - Footer tetap di luar main. sectors-scene__footer-hold100vh + margin Footer−100vh membuat Sectors tetap sticky sampai tertutup. Extension hanya aktif bila Footer muat/Sectors sticky; Education selesai dahulu. Tidak ada GSAP pin/hold setelah Footer utuh.
 - Rule dari tengah, logo/heading/email/kolom link/wordmark/legal reveal berurutan dan reversible; Sectors mundur/meredup. Reduced motion/direct #footer utuh tanpa overlap. Cleanup style/context/listener/RAF wajib; tidak mengubah API/newsletter/flow bisnis. AppLayout memakai koordinat anchor absolut dan event footer-ready.
 - Browser1280×720/390×844, document end, reverse, form keyboard/dialog diperiksa. Build React/legacy dan23 tes frontend lulus. Detail docs/landing-motion.md; tunggu QC pengguna.
+
+# Navigasi dashboard — sliding pill (menunggu QC)
+
+- Organization header Dashboard/Donors/Campaigns/Donations memakai satu indicator dekoratif melalui useSlidingNav; transisi posisi/lebar/tinggi500ms, warna teks350ms. NavLink/aria-current/fokus/URL dan guard API tidak berubah. Admin internal/CMS tidak termasuk tugas ini.
+- Ukur subpixel setelah route/font/resize, tanpa animasi sweep pada mount. Mobile menggulir scroller horizontal secukupnya agar link aktif terlihat; reduced motion tanpa transisi. Bersihkan ResizeObserver/frame/font callback; jangan menambah clock GSAP/Lenis.
+- Browser desktop/mobile, route/Back/keyboard/refresh diperiksa. Build React/legacy dan23 tes frontend lulus; detail docs/dashboard-sliding-tabs.md. Tunggu QC pengguna.
+
+# Kelanjutan sliding pill admin internal — menunggu QC
+
+- Sliding pill kini juga aktif di menu AdminLayout dan sepuluh tab CMS, menggantikan batas cakupan portal saja pada tugas sebelumnya. Gunakan useSlidingNav yang sama dan CSS admin; wrap mobile mendukung gerak x/y serta perubahan lebar/tinggi.
+- Navigasi section CMS harus persisten di luar keyed EditorLoader agar pill dapat bergerak antar section. Loader/form tetap keyed untuk menjaga draft/loading/error; jangan memindahkan guard draft atau mengubah API. aria-current/Link tetap sumber active, termasuk saat navigasi diblokir.
+- Desktop/mobile, menu admin/CMS, keyboard/Back/refresh serta Keep editing/reset draft tanpa menyimpan telah diperiksa. Build React/legacy dan23 tes frontend lulus. Detail docs/dashboard-sliding-tabs.md; tunggu QC.
+
+# Microinteraction Total Raised — menunggu QC
+
+- Hanya nominal Total Raised dan grafik tren portal organisasi: refresh menghitung ke nilai API selama850ms; Daily/Monthly mentransisikan instance Chart.js yang sama. Nominal sama tidak recount; refetch otomatis pada view yang sama tidak replay. Pertahankan USD integer cents, nilai aksesibel dan reduced motion/cleanup.
+- Retensi laporan saat request/retry wajib scoped akun/organisasi. Label interval/periode mengikuti laporan aktual yang masih terlihat, dengan updating/stale/error/retry; jangan ekspor placeholder/error atau menjadikan fixture fallback API. Tidak mengubah backend/database maupun Campaign/gauge.
+- Browser1280×720/390×844, refresh dan interval diperiksa. Build React/legacy dan24 tes frontend lulus. Batas pemeriksaan dan detail ada di docs/dashboard-raised-motion.md. Tunggu QC sebelum kartu/interaksi berikutnya.
+
+# Revisi Total Raised — rolling digits dan line reveal
+
+- Counter sebelumnya diganti reel vertikal per digit1050ms/stagger35ms, simbol tetap; nilai aksesibel aktual, tanpa render React per frame. Refresh grafik memakai clip kiri→kanan1200ms dengan bar sedikit menyusul. Interval memakai morph1050ms; total sama/background refetch tidak replay.
+- Cleanup Web Animations/RAF/Chart/listener dan reduced motion wajib dipertahankan. Tidak menambah pengelompokan data khusus/pulse/check dropdown atau menyentuh backend. Desktop/mobile dan interval diperiksa, build React/legacy serta24 tes frontend lulus; detail docs/dashboard-raised-motion.md. Tunggu QC.
+
+# Persiapan paket VPS — 26 Oktober 2026
+
+- Pengguna mengizinkan step1 paket kode lokal terbaru untuk aaPanel. `npm run package:vps` membangun frontend lalu membuat ZIP `kindsight/` beserta manifest/checksum di deploy-artifacts (ignored). Paket mengambil working tree allowlist, termasuk revisi belum commit; tidak memakai Git archive lama dan tidak push/deploy.
+- Paket mengecualikan .env/credential/.local/.git/node_modules/SQL/upload pengguna. DB dan storage harus dipindahkan privat terpisah nanti. Dokumentasi deployment/README.md dan template deployment/vps.env.example; web root wajib dist, source/config tidak boleh dipublikasikan.
+- API tetap npm run start:api melalui tsx devDependency: VPS perlu npm ci --include=dev; jangan upload node_modules Mac atau memakai omit=dev tanpa perubahan runtime teruji. Tidak ada perubahan backend/migrasi/database.
+- Verifikasi build,24 frontend/13 unit API, ZIP+hash, clean install dan startup health200/ready503 tanpa DB lulus pada Mac. Tidak mengklaim Linux/VPS/DB teruji. Audit runtime menemukan high pada body-parser/multer; selesaikan sebelum publik. trust proxy/limiter Nginx juga belum disesuaikan; jangan membuka publik sebelum review. Tidak mengubah konfigurasi VPS/aplikasi lain.
+
+# Persiapan GitHub CI untuk VPS
+
+- Atas instruksi pengguna, .github/workflows/vps-package.yml menyiapkan test/build/ZIP+SHA di Ubuntu Node22.22.2 untuk push main,PR/manual. Action dipin commit dan permission contents:read; tidak memakai rahasia/deploy/migrasi VPS. Audit high informasional selama persiapan, wajib diselesaikan sebelum publik.
+- Rekomendasi domain kindsight.owwteam.dev; belum mengubah DNS atau base aplikasi. Instruksi deployment/github-vps.md membedakan build CI dari deploy SSH yang belum terhubung. Jangan mengklaim otomatis update VPS sebelum deployment teruji atau git pull pada direktori ZIP nongit. Env/upload/database wajib persisten terpisah saat update.

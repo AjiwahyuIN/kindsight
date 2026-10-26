@@ -10,3 +10,24 @@
 @media(max-width:47.999rem) {
   .portal-layout { &__content { padding: 0 var(--space-4) var(--space-8); } &__organization { max-width: 220px; } &__navigation-link { padding-inline: 14px; } }
 }
+
+.portal-layout {
+  .dashboard-shell__navigation { position: relative; isolation: isolate; }
+  &__navigation-indicator {
+    display: none; position: absolute; top: 0; left: 0; z-index: 0; pointer-events: none;
+    width: var(--nav-pill-width); height: var(--nav-pill-height);
+    transform: translate(var(--nav-pill-x), var(--nav-pill-y));
+    border-radius: var(--radius-pill); background: var(--color-text);
+  }
+  &__navigation-link { position: relative; z-index: 1; transition: color .35s ease, background-color .2s ease; }
+  [data-indicator] {
+    .portal-layout__navigation-indicator { display: block; }
+    .portal-layout__navigation-link[aria-current='page'] { background: transparent; }
+  }
+  [data-indicator-motion] .portal-layout__navigation-indicator {
+    transition: transform .5s cubic-bezier(.22, 1, .36, 1), width .5s cubic-bezier(.22, 1, .36, 1), height .5s cubic-bezier(.22, 1, .36, 1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-indicator-motion] .portal-layout__navigation-indicator, .portal-layout__navigation-link { transition: none; }
+  }
+}
