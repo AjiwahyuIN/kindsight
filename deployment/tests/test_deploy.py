@@ -1,5 +1,6 @@
 import hashlib
 import importlib.util
+import itertools
 import json
 from pathlib import Path
 import stat
@@ -51,8 +52,8 @@ class DeploymentSafety(unittest.TestCase):
 
 
     def test_rollback_preserves_env_storage_and_other_app(self):
-        for fail_midway in [False, True]:
-            with self.subTest(fail_midway=fail_midway), tempfile.TemporaryDirectory() as tmp:
+        for fail_midway, missing_lock in itertools.product([False, True], repeat=2):
+            with self.subTest(fail_midway=fail_midway, missing_lock=missing_lock), tempfile.TemporaryDirectory() as tmp:
                 root=Path(tmp); app=root/'app'; release=root/'release'; backup=root/'backup'; preserved=root/'storage'
                 app.mkdir();release.mkdir();backup.mkdir()
                 (app/'.env').write_text('private-fixture')
@@ -63,6 +64,8 @@ class DeploymentSafety(unittest.TestCase):
                         if unit.endswith('.json'): path.write_text(version)
                         else:
                             path.mkdir();(path/'marker').write_text(version)
+                if missing_lock:
+                    (app/'package-lock.json').unlink()
                 (app/'server/storage').mkdir();(app/'server/storage/logo.png').write_bytes(b'user-upload')
                 if fail_midway:
                     for file in (release/'dist').iterdir(): file.unlink()
@@ -72,11 +75,15 @@ class DeploymentSafety(unittest.TestCase):
                     with self.assertRaises(FileNotFoundError): deploy.activate_units(app,release,backup,preserved,moved)
                 else:
                     deploy.activate_units(app,release,backup,preserved,moved)
+                    self.assertEqual((app/'package-lock.json').read_text(), 'new')
                 deploy.restore_units(app,release,backup,preserved,moved)
                 self.assertEqual((app/'server/marker').read_text(),'old')
                 self.assertEqual((app/'dist/marker').read_text(),'old')
                 self.assertEqual((app/'.env').read_text(),'private-fixture')
                 self.assertEqual((app/'server/storage/logo.png').read_bytes(),b'user-upload')
                 self.assertEqual((root/'other-app').read_text(),'untouched')
+                self.assertEqual((app/'package-lock.json').exists(), not missing_lock)
+                if not missing_lock:
+                    self.assertEqual((app/'package-lock.json').read_text(), 'old')
 
 if __name__ == '__main__': unittest.main()

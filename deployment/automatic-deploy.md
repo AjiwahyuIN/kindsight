@@ -43,3 +43,9 @@ Lima tes deployment (termasuk pemulihan unit saat aktivasi parsial gagal, env/up
 - npm ci sekarang menerima --cache <release>/.npm-cache secara eksplisit. Cache dibuat oleh proses www di release Kindsight; opsi CLI mengalahkan cache global aaPanel tanpa mengubah npmrc atau izin /www/server/nodejs/cache. Tidak melakukan chown global atau upgrade npm.
 - Lima tes deployment dan diff check lulus. Body-parser 2.4.0 dan multer 2.5.0 sudah dipush setelah audit memblokir percobaan pertama; audit bersih, build/unit API/upload/CMS MySQL lokal lulus.
 - Helper terpasang masih versi lama sampai root mengganti satu file /usr/local/sbin/kindsight-deploy dengan hash terverifikasi. Installer awal tidak dijalankan ulang; konfigurasi, sudoers, startup script, env dan aplikasi lain tidak diubah. Setelah pembaruan, aktifkan kembali variable dan uji workflow.
+
+## Uji cache dan rollback aktivasi — 26 Oktober 2026
+
+- Helper cache baru dipasang root dan workflow 40293813907 lolos package/audit/npm ci/preflight. Aktivasi gagal karena instalasi ZIP awal tidak memiliki package-lock.json. Versi sebelumnya berhasil dipulihkan otomatis (log ROLLED BACK), readiness kembali200, hash respons publik hero/footer tetap diperiksa dan PID aplikasi www lain tidak berubah pada pemeriksaan.
+- Perbaikan berikutnya menerima hanya package-lock.json sebagai unit live opsional: lockfile paket baru tetap wajib; rollback mengembalikan kondisi awal tanpa lockfile jika sebelumnya tidak ada. Unit live wajib lain diperiksa sebelum stop. Tes mencakup aktivasi penuh/parsial dan lockfile ada/tidak ada, env/storage/aplikasi tetangga tetap utuh.
+- Perbaikan helper kedua masih perlu dipasang root dengan hash terverifikasi. VPS_DEPLOY_ENABLED=false sampai uji ulang; jangan mengklaim deployment versi baru berhasil.

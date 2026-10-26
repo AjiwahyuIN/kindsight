@@ -291,3 +291,8 @@
 
 - Helper/sudo khusus Kindsight terpasang, GitHub production/main dan secrets tersedia. Push main memicu CI; audit bersih setelah patch body-parser2.4.0/multer2.5.0. Deploy berhenti sebelum aktivasi pada EACCES cache npm global aaPanel. Live lama tetap sehat; VPS_DEPLOY_ENABLED=false.
 - Perbaikan helper memberi npm ci --cache <release>/.npm-cache; jangan mengikuti saran chown global /www/server/nodejs/cache. Lima tes deployment lolos. Root perlu memasang helper baru dengan checksum, lalu uji ulang. Jangan klaim deploy/rollback live teruji sebelum sukses. Detail deployment/automatic-deploy.md.
+
+# Status deploy setelah perbaikan cache
+
+- Helper cache berhasil dipasang root dan npm ci/preflight lolos. Workflow40293813907 gagal pada aktivasi karena package-lock.json live tidak ada; rollback otomatis memulihkan versi sebelumnya dan readiness200. PID aplikasi lain tetap sama saat diperiksa.
+- Helper kini menangani lockfile live opsional dan rollback ke kondisi awal tanpa lockfile; paket baru wajib membawa lockfile. Lima tes (kombinasi rollback parsial/penuh, lockfile ada/tidak) lulus. Menunggu pemasangan root helper revisi kedua; variable deploy=false, versi baru belum live.

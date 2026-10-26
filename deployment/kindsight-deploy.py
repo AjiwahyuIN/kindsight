@@ -185,7 +185,11 @@ def activate_units(app, release, backup, preserved, moved):
             raise RuntimeError('Unexpected user storage path')
         storage.rename(preserved)
     for unit in UNITS:
-        (app / unit).rename(backup / unit)
+        original = app / unit
+        if original.exists():
+            original.rename(backup / unit)
+        elif unit != 'package-lock.json':
+            raise RuntimeError('Required live unit missing: ' + unit)
         moved.append(unit)
         (release / unit).rename(app / unit)
     if preserved.exists():
@@ -199,7 +203,8 @@ def restore_units(app, release, backup, preserved, moved):
     for unit in reversed(moved):
         if (app / unit).exists():
             (app / unit).rename(release / unit)
-        (backup / unit).rename(app / unit)
+        if (backup / unit).exists():
+            (backup / unit).rename(app / unit)
     if preserved.exists():
         preserved.rename(app / 'server/storage')
 
@@ -247,6 +252,8 @@ def main():
         for unit in UNITS:
             if not (release / unit).exists() or (release / unit).is_symlink() or (APP / unit).is_symlink():
                 raise RuntimeError('Unexpected release/live unit')
+            if not (APP / unit).exists() and unit != 'package-lock.json':
+                raise RuntimeError('Required live unit missing: ' + unit)
         if (release / 'server/storage').exists():
             raise RuntimeError('Release must not supply user storage')
         # Preserve content-addressed assets referenced by clients from the previous version.
