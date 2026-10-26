@@ -296,3 +296,9 @@
 
 - Helper cache berhasil dipasang root dan npm ci/preflight lolos. Workflow40293813907 gagal pada aktivasi karena package-lock.json live tidak ada; rollback otomatis memulihkan versi sebelumnya dan readiness200. PID aplikasi lain tetap sama saat diperiksa.
 - Helper kini menangani lockfile live opsional dan rollback ke kondisi awal tanpa lockfile; paket baru wajib membawa lockfile. Lima tes (kombinasi rollback parsial/penuh, lockfile ada/tidak) lulus. Menunggu pemasangan root helper revisi kedua; variable deploy=false, versi baru belum live.
+
+# Status automatic deploy aktif — menggantikan status persiapan di atas
+
+- Helper root revisi cache/lockfile telah dipasang pengguna; production dibatasi main, secrets terpasang dan fingerprint diverifikasi. VPS_DEPLOY_ENABLED=true. Workflow40294639507 berhasil deploy d07417d, readiness lokal/publik200 dan hash HTML HTTPS cocok dist VPS. Push main menjalankan jalur otomatis; PR tidak deploy.
+- Hanya Kindsight direstart; PID aplikasi lain tetap sama pada pemeriksaan. Env/upload dipertahankan, tanpa migrasi/seed/reset. Hero/Footer publik tidak berubah. Login admin live dan Navbar Save and publish tanpa edit copy membuktikan toast/tombol sukses; data publik Navbar identik, hanya revisi save berubah, lalu logout.
+- Rollback parsial teramati berhasil pada kegagalan lockfile sebelumnya; reboot/kill paksa belum diuji. Helper root tidak auto-update, perubahan perlu review/checksum/pemasangan root. Restart singkat, retensi backup/cache manual, tidak mengklaim production-ready. Detail deployment/automatic-deploy.md dan deployment/github-vps.md.

@@ -2,7 +2,7 @@
 
 ## Batas dan status
 
-Helper root/sudo terbatas sudah dipasang. Environment production dibatasi main, tiga secret SSH disimpan, fingerprint ED25519 dicocokkan lewat Terminal aaPanel. Uji push main memicu workflow, tetapi deploy pertama berhenti pada npm ci di staging sebelum aktivasi: cache global aaPanel /www/server/nodejs/cache dimiliki root. Website lama tetap berjalan. VPS_DEPLOY_ENABLED saat ini false sampai perbaikan helper cache dipasang dan uji ulang selesai. Jangan mengklaim auto-deploy live atau rollback live sudah lolos.
+**Aktif dan berhasil diuji 26 Oktober 2026.** Root helper revisi lockfile terpasang, environment production dibatasi main, tiga secret SSH tersedia dan fingerprint ED25519 diverifikasi melalui Terminal aaPanel. VPS_DEPLOY_ENABLED=true. Workflow manual [40294639507](https://github.com/AjiwahyuIN/kindsight/actions/runs/40294639507) memasang commit d07417d7bb9d94748cbf3024dce42851d4e073a3 dengan sukses. Setiap push main menjalankan tes/build/audit lalu deploy berurutan. Ini belum merupakan klaim kesiapan production seluruh produk. Bagian uji gagal di bawah merupakan histori yang sudah diperbaiki.
 
 Pemeriksaan VPS menemukan nama aktual **kindsight_api**, bukan kingsight_api. API berjalan via startup script aaPanel, bukan PM2. Fungsi restart_project bawaan juga melakukan chmod/chown pada direktori Node bersama, jadi tidak dipakai. Helper hanya menjalankan `/www/server/nodejs/vhost/scripts/kindsight_api.sh` sebagai www, setelah mencocokkan checksum script dengan saat instalasi. Perubahan script panel memerlukan tinjauan ulang.
 
@@ -49,3 +49,10 @@ Lima tes deployment (termasuk pemulihan unit saat aktivasi parsial gagal, env/up
 - Helper cache baru dipasang root dan workflow 40293813907 lolos package/audit/npm ci/preflight. Aktivasi gagal karena instalasi ZIP awal tidak memiliki package-lock.json. Versi sebelumnya berhasil dipulihkan otomatis (log ROLLED BACK), readiness kembali200, hash respons publik hero/footer tetap diperiksa dan PID aplikasi www lain tidak berubah pada pemeriksaan.
 - Perbaikan berikutnya menerima hanya package-lock.json sebagai unit live opsional: lockfile paket baru tetap wajib; rollback mengembalikan kondisi awal tanpa lockfile jika sebelumnya tidak ada. Unit live wajib lain diperiksa sebelum stop. Tes mencakup aktivasi penuh/parsial dan lockfile ada/tidak ada, env/storage/aplikasi tetangga tetap utuh.
 - Perbaikan helper kedua masih perlu dipasang root dengan hash terverifikasi. VPS_DEPLOY_ENABLED=false sampai uji ulang; jangan mengklaim deployment versi baru berhasil.
+
+## Verifikasi live berhasil
+
+- Log DEPLOYED d07417d7bb9d94748cbf3024dce42851d4e073a3, activation journal bersih, lockfile baru tersedia. API health/ready200 JSON, database connected/schema ready. SHA256 HTML HTTPS cocok dengan dist/index.html VPS (183a6a393e5b234a652951eabc99258b10dbeb1eb98dff64a51ead6bbb2aa646).
+- Route admin/login dan app/dashboard200, API hilang404 JSON, aset hilang404. Hero/Footer hash respons sama sebelum/sesudah. PID seluruh proses www lain tetap sama pada pemeriksaan; hanya Kindsight berganti PID. Tidak menjalankan migrasi/seed/reset.
+- Login admin live, Navbar Save and publish tanpa edit copy: toast Navbar published dan tombol Saved and published tampil. Data respons publik Navbar identik sebelum/sesudah; hanya revisi penyimpanan berubah. Sesi verifikasi sudah logout. Screenshot lokal docs/screenshots/cms-publish-feedback-live.png tidak dimasukkan repo publik.
+- Rollback aktivasi parsial benar-benar teramati pada percobaan sebelumnya (lockfile awal hilang); pemulihan setelah reboot/kill paksa belum diuji. Cache npm tiap release diisolasi; cache/config bersama tidak diubah.
